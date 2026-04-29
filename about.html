@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | Taufiq Mustafizur Rahman</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .batman-bg {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background-image: url('https://images.unsplash.com/photo-1509347528160-9a9e33742cdb?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover; background-position: center;
+            opacity: 0.08; z-index: -2;
+            filter: grayscale(100%) contrast(120%);
+        }
+        .about-page {
+            min-height: 100vh; display: flex; align-items: center; justify-content: center;
+            padding: 8rem 2rem 4rem; flex-direction: column; gap: 2rem;
+        }
+        .about-card {
+            max-width: 800px; width: 100%; padding: 4rem; text-align: left;
+            background: var(--bg-card);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-lg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        }
+        .about-card .title {
+            font-size: 2.8rem; margin-bottom: 0.5rem; color: var(--text-primary);
+            line-height: 1.1;
+        }
+        .about-card .subtitle {
+            font-size: 1rem; color: var(--accent-cyan); margin-bottom: 2.5rem;
+            font-weight: 500; letter-spacing: 0.03em;
+        }
+        .about-card .description {
+            margin-bottom: 1.5rem; font-size: 1.05rem; line-height: 1.8;
+            color: var(--text-secondary); max-width: 100%;
+        }
+        .about-highlight { color: var(--accent-cyan); font-weight: 600; }
+        .btn-row { display: flex; gap: 1rem; margin-top: 2.5rem; flex-wrap: wrap; }
+        
+        @media (max-width: 768px) {
+            .about-card { padding: 2.5rem 1.5rem; }
+            .about-card .title { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="glow-blob glow-blob-1"></div>
+    <div class="glow-blob glow-blob-2"></div>
+    <div class="glow-blob glow-blob-3"></div>
+    <div class="batman-bg"></div>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">TMR</a>
+            <ul class="nav-links">
+                <li><a href="about.html">About</a></li>
+                <li><a href="index.html#projects">Projects</a></li>
+                <li><a href="index.html#hobbies">Hobbies</a></li>
+                <li><a href="index.html#contact" class="btn-nav">Let's Connect</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="about-page">
+        <div class="about-card">
+            <h1 class="title">🦇 About Me</h1>
+            <p class="subtitle">I'm Vengeance. I am the Night. (Just kidding, I'm Taufiq.)</p>
+
+            <p class="description">
+                I am a passionate <span class="about-highlight">Computer Science & Engineering</span> student at <span class="about-highlight">Brac University</span>. With a deep love for problem-solving, software development, and everything tech, I constantly strive to build innovative solutions and sleek applications. My technical journey has led me to explore low-level systems, full-stack web development, and object-oriented architectures.
+            </p>
+
+            <p class="description">
+                When I'm not writing code or debugging late into the night, you can find me exploring my hobbies: capturing life through photography, diving into cinematic worlds, following high-speed racing, getting lost in books, and gaming. I believe in continuous learning, pushing boundaries, and embracing the darkness to find the light (hence the Batman theme!).
+            </p>
+
+            <div class="btn-row">
+                <a href="CV.pdf" target="_blank" class="btn-primary glow-btn"><i class="fa-solid fa-file-pdf"></i> Download CV</a>
+                <a href="index.html" class="btn-secondary">← Back to Home</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
