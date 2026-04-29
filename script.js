@@ -39,21 +39,53 @@ document.addEventListener('DOMContentLoaded', () => {
         yearElement.textContent = new Date().getFullYear();
     }
 
-    // Prevent default form submission for the demo
-    const form = document.querySelector('.contact-form');
+    // Contact Form — submit via Formspree (AJAX)
+    const form = document.getElementById('contactForm');
     if (form) {
-        form.addEventListener('submit', (e) => {
+        form.addEventListener('submit', async (e) => {
             e.preventDefault();
-            const btn = form.querySelector('button');
-            const originalText = btn.textContent;
-            btn.textContent = "Message Sent! ✓";
-            btn.style.background = "var(--accent-green)";
-            form.reset();
 
+            const btn = document.getElementById('contactSubmitBtn');
+            const status = document.getElementById('formStatus');
+            const originalText = btn.textContent;
+
+            // Loading state
+            btn.textContent = 'Sending...';
+            btn.disabled = true;
+            status.style.display = 'none';
+
+            try {
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: new FormData(form),
+                    headers: { 'Accept': 'application/json' }
+                });
+
+                if (response.ok) {
+                    btn.textContent = 'Message Sent! ✓';
+                    btn.style.background = 'var(--accent-green)';
+                    status.textContent = "Thanks! I'll get back to you soon.";
+                    status.style.color = 'var(--accent-green)';
+                    status.style.display = 'block';
+                    form.reset();
+                } else {
+                    const data = await response.json();
+                    throw new Error(data.errors ? data.errors.map(e => e.message).join(', ') : 'Something went wrong.');
+                }
+            } catch (error) {
+                btn.textContent = 'Failed to Send ✗';
+                btn.style.background = '#c0392b';
+                status.textContent = error.message || 'Network error. Please try again.';
+                status.style.color = '#e74c3c';
+                status.style.display = 'block';
+            }
+
+            // Reset button after 4 seconds
             setTimeout(() => {
                 btn.textContent = originalText;
-                btn.style.background = "";
-            }, 3000);
+                btn.style.background = '';
+                btn.disabled = false;
+            }, 4000);
         });
     }
 
