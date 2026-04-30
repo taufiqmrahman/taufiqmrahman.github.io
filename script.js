@@ -161,23 +161,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Animate using Web Animation API
             const animation = bat.animate([
-                { 
-                    left: originX + 'px', 
-                    top: originY + 'px', 
+                {
+                    left: originX + 'px',
+                    top: originY + 'px',
                     opacity: 0,
                     transform: `scaleX(${endX < originX ? -1 : 1}) scale(0.3)`
                 },
-                { 
+                {
                     opacity: 1,
                     offset: 0.1
                 },
-                { 
+                {
                     opacity: 0.9,
                     offset: 0.5
                 },
-                { 
-                    left: endX + 'px', 
-                    top: endY + 'px', 
+                {
+                    left: endX + 'px',
+                    top: endY + 'px',
                     opacity: 0,
                     transform: `scaleX(${endX < originX ? -1 : 1}) scale(1) rotate(${(Math.random() - 0.5) * 40}deg)`
                 }
@@ -193,7 +193,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Attach bat swarm to all buttons and clickable links
-    const clickables = document.querySelectorAll('.btn-primary, .btn-secondary, .btn-nav, .social-icon, .card-link, .hobby-card');
+    const clickables = document.querySelectorAll('.btn-primary, .btn-secondary, .btn-nav, .social-icon, .card-link, .hobby-card, .explore-btn');
     clickables.forEach(el => {
         el.addEventListener('click', (e) => {
             const rect = el.getBoundingClientRect();
