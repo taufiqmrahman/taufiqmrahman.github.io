@@ -135,42 +135,57 @@ body {
 }
 
 .cloud-1 {
-    width: 500px; height: 130px;
-    top: 5%; left: -15%;
+    width: 500px;
+    height: 130px;
+    top: 5%;
+    left: -15%;
     animation: driftCloud 35s linear infinite;
 }
 
 .cloud-2 {
-    width: 650px; height: 150px;
-    top: 12%; left: -25%;
+    width: 650px;
+    height: 150px;
+    top: 12%;
+    left: -25%;
     opacity: 0.85;
     animation: driftCloud 50s 3s linear infinite;
 }
 
 .cloud-3 {
-    width: 450px; height: 110px;
-    top: 22%; left: -15%;
+    width: 450px;
+    height: 110px;
+    top: 22%;
+    left: -15%;
     opacity: 0.7;
     animation: driftCloud 40s 10s linear infinite;
 }
 
 .cloud-4 {
-    width: 600px; height: 140px;
-    top: 8%; left: -30%;
+    width: 600px;
+    height: 140px;
+    top: 8%;
+    left: -30%;
     opacity: 0.6;
     animation: driftCloud 55s 18s linear infinite;
 }
 
 .cloud-5 {
-    width: 400px; height: 100px;
-    top: 28%; left: -12%;
+    width: 400px;
+    height: 100px;
+    top: 28%;
+    left: -12%;
     opacity: 0.55;
     animation: driftCloud 42s 7s linear infinite;
 }
 
 @keyframes driftCloud {
-    0%   { transform: translateX(0); }
-    100% { transform: translateX(calc(100vw + 700px)); }
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(calc(100vw + 700px));
+    }
 }
 
 /* ===== SWEEPING SPOTLIGHTS ===== */
@@ -180,13 +195,11 @@ body {
     width: 300px;
     height: 110%;
     pointer-events: none;
-    background: linear-gradient(
-        to top,
-        rgba(140, 175, 240, 0.12) 0%,
-        rgba(140, 175, 240, 0.05) 30%,
-        rgba(140, 175, 240, 0.015) 60%,
-        transparent 90%
-    );
+    background: linear-gradient(to top,
+            rgba(140, 175, 240, 0.12) 0%,
+            rgba(140, 175, 240, 0.05) 30%,
+            rgba(140, 175, 240, 0.015) 60%,
+            transparent 90%);
     /* Cone shape: narrow point at bottom center, wide spread at top */
     clip-path: polygon(50% 100%, 0% 0%, 100% 0%);
 }
@@ -207,42 +220,90 @@ body {
 }
 
 @keyframes sweepBeam1 {
-    0%   { transform: rotate(-35deg); opacity: 0.3; }
-    25%  { transform: rotate(-10deg); opacity: 0.8; }
-    50%  { transform: rotate(20deg);  opacity: 0.6; }
-    75%  { transform: rotate(-5deg);  opacity: 0.9; }
-    100% { transform: rotate(-35deg); opacity: 0.3; }
+    0% {
+        transform: rotate(-35deg);
+        opacity: 0.3;
+    }
+
+    25% {
+        transform: rotate(-10deg);
+        opacity: 0.8;
+    }
+
+    50% {
+        transform: rotate(20deg);
+        opacity: 0.6;
+    }
+
+    75% {
+        transform: rotate(-5deg);
+        opacity: 0.9;
+    }
+
+    100% {
+        transform: rotate(-35deg);
+        opacity: 0.3;
+    }
 }
 
 @keyframes sweepBeam2 {
-    0%   { transform: rotate(30deg);  opacity: 0.2; }
-    30%  { transform: rotate(5deg);   opacity: 0.7; }
-    60%  { transform: rotate(-25deg); opacity: 0.5; }
-    80%  { transform: rotate(10deg);  opacity: 0.8; }
-    100% { transform: rotate(30deg);  opacity: 0.2; }
+    0% {
+        transform: rotate(30deg);
+        opacity: 0.2;
+    }
+
+    30% {
+        transform: rotate(5deg);
+        opacity: 0.7;
+    }
+
+    60% {
+        transform: rotate(-25deg);
+        opacity: 0.5;
+    }
+
+    80% {
+        transform: rotate(10deg);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: rotate(30deg);
+        opacity: 0.2;
+    }
 }
 
 /* ===== BAT SIGNAL at top ===== */
 .bat-signal {
     position: absolute;
-    top: 12%; left: 50%;
+    top: 12%;
+    left: 50%;
     transform: translateX(-50%);
-    display: flex; align-items: center; justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     animation: batSignalPulse 4s ease-in-out infinite;
 }
 
 .bat-signal img {
-    width: 250px; height: auto;
-    filter: invert(1) sepia(1) saturate(3) hue-rotate(190deg) brightness(2)
-           drop-shadow(0 0 15px rgba(150, 200, 255, 0.9))
-           drop-shadow(0 0 35px rgba(130, 180, 255, 0.5))
-           drop-shadow(0 0 70px rgba(110, 160, 240, 0.25));
+    width: 250px;
+    height: auto;
+    filter: invert(1) sepia(1) saturate(3) hue-rotate(190deg) brightness(2) drop-shadow(0 0 15px rgba(150, 200, 255, 0.9)) drop-shadow(0 0 35px rgba(130, 180, 255, 0.5)) drop-shadow(0 0 70px rgba(110, 160, 240, 0.25));
     opacity: 0.85;
 }
 
 @keyframes batSignalPulse {
-    0%, 100% { opacity: 0.7; transform: translateX(-50%) scale(1); }
-    50%      { opacity: 1;   transform: translateX(-50%) scale(1.04); }
+
+    0%,
+    100% {
+        opacity: 0.7;
+        transform: translateX(-50%) scale(1);
+    }
+
+    50% {
+        opacity: 1;
+        transform: translateX(-50%) scale(1.04);
+    }
 }
 
 /* ===== ANIMATED BATS ===== */
@@ -878,7 +939,7 @@ main {
     padding: 4px;
     background: linear-gradient(135deg, #0c1a3a, #4a8ec9, #2a4a7a, #0c1a3a);
     overflow: hidden;
-    box-shadow: 0 0 30px rgba(74, 142, 201, 0.2), inset 0 0 20px rgba(0,0,0,0.3);
+    box-shadow: 0 0 30px rgba(74, 142, 201, 0.2), inset 0 0 20px rgba(0, 0, 0, 0.3);
 }
 
 .glow-effect {
@@ -1065,6 +1126,91 @@ main {
     color: var(--accent-cyan);
 }
 
+/* ===== EXPLORE BUTTONS (Home Page Nav) ===== */
+.explore-section {
+    padding-top: 0 !important;
+    padding-bottom: 6rem;
+}
+
+.explore-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.explore-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.85rem;
+    padding: 1.1rem 2.2rem;
+    border-radius: 100px;
+    text-decoration: none;
+    font-family: var(--font-body);
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    background: var(--bg-card);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.explore-btn i {
+    font-size: 1.15rem;
+    color: var(--accent-cyan);
+    transition: transform 0.3s ease;
+}
+
+.explore-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 100px;
+    background: linear-gradient(135deg, rgba(74, 142, 201, 0.1), rgba(58, 106, 160, 0.05));
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.explore-btn:hover::before {
+    opacity: 1;
+}
+
+.explore-btn:hover {
+    border-color: rgba(74, 142, 201, 0.45);
+    transform: translateY(-4px);
+    box-shadow:
+        0 10px 30px rgba(74, 142, 201, 0.18),
+        0 0 0 1px rgba(74, 142, 201, 0.1);
+}
+
+.explore-btn:hover i {
+    transform: scale(1.15);
+}
+
+.explore-btn:active {
+    transform: translateY(-1px);
+}
+
+.explore-btn-arrow {
+    font-size: 1rem;
+    opacity: 0;
+    transform: translateX(-8px);
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    color: var(--accent-cyan);
+    flex-shrink: 0;
+}
+
+.explore-btn:hover .explore-btn-arrow {
+    opacity: 1;
+    transform: translateX(0);
+}
+
 /* ===== HOBBIES SECTION ===== */
 .hobbies-grid {
     display: grid;
@@ -1162,26 +1308,97 @@ main {
     align-items: center;
     gap: 0.5rem;
     padding: 0.7rem 1.3rem;
-    border: 1px solid var(--glass-border);
+    border: 1px solid transparent;
     border-radius: 100px;
-    color: var(--text-secondary);
+    color: #fff;
     text-decoration: none;
     font-family: var(--font-body);
     font-size: 0.85rem;
-    font-weight: 500;
+    font-weight: 600;
     transition: var(--transition);
 }
 
 .social-icon i {
-    font-size: 1rem;
+    font-size: 1.1rem;
 }
 
 .social-icon:hover {
-    border-color: var(--accent-cyan);
-    color: var(--accent-cyan);
-    background: rgba(34, 211, 238, 0.06);
-    box-shadow: 0 0 15px rgba(34, 211, 238, 0.1);
-    transform: translateY(-2px);
+    transform: translateY(-3px);
+    filter: brightness(1.15);
+}
+
+/* Brand Colors */
+a.social-github {
+    background: #24292e;
+    border-color: #3a3f45;
+}
+a.social-github:hover {
+    box-shadow: 0 6px 20px rgba(36, 41, 46, 0.5);
+    color: #fff;
+}
+
+a.social-linkedin {
+    background: #0A66C2;
+    border-color: #0A66C2;
+}
+a.social-linkedin:hover {
+    box-shadow: 0 6px 20px rgba(10, 102, 194, 0.5);
+    color: #fff;
+}
+
+a.social-facebook {
+    background: #1877F2;
+    border-color: #1877F2;
+}
+a.social-facebook:hover {
+    box-shadow: 0 6px 20px rgba(24, 119, 242, 0.5);
+    color: #fff;
+}
+
+a.social-instagram {
+    background: linear-gradient(135deg, #833AB4, #E1306C, #F77737);
+    border-color: #E1306C;
+}
+a.social-instagram:hover {
+    box-shadow: 0 6px 20px rgba(225, 48, 108, 0.5);
+    color: #fff;
+}
+
+a.social-letterboxd {
+    background: #00E054;
+    border-color: #00E054;
+    color: #000;
+    font-weight: 700;
+}
+a.social-letterboxd i {
+    color: #000;
+}
+a.social-letterboxd:hover {
+    box-shadow: 0 6px 20px rgba(0, 224, 84, 0.5);
+    color: #000;
+}
+
+a.social-spotify {
+    background: #1DB954;
+    border-color: #1DB954;
+    color: #000;
+    font-weight: 700;
+}
+a.social-spotify i {
+    color: #000;
+}
+a.social-spotify:hover {
+    box-shadow: 0 6px 20px rgba(29, 185, 84, 0.5);
+    color: #000;
+}
+
+a.social-email {
+    background: #EA4335;
+    border-color: #EA4335;
+}
+a.social-email:hover {
+    box-shadow: 0 6px 20px rgba(234, 67, 53, 0.5);
+    color: #fff;
 }
 
 .contact-form {
@@ -1346,6 +1563,15 @@ footer {
         grid-template-columns: repeat(2, 1fr);
     }
 
+    .explore-buttons {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .explore-btn {
+        justify-content: center;
+    }
+
     .greeting-name {
         font-size: 2.4rem;
     }
@@ -1367,6 +1593,11 @@ footer {
 
     .card {
         padding: 2rem 1.5rem;
+    }
+
+    .explore-btn {
+        padding: 0.9rem 1.6rem;
+        font-size: 0.95rem;
     }
 
     .greeting-name {
