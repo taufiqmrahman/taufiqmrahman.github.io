@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Navbar Scroll Effect
+
+    // ===== NAVBAR SCROLL EFFECT =====
     const navbar = document.querySelector('.navbar');
     if (navbar) {
         window.addEventListener('scroll', () => {
@@ -11,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Mobile Menu Toggle
+    // ===== MOBILE MENU TOGGLE =====
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
     const navLinksItems = document.querySelectorAll('.nav-links a');
@@ -23,7 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Close mobile menu when a link is clicked
     navLinksItems.forEach(item => {
         item.addEventListener('click', () => {
             if (hamburger && hamburger.classList.contains('active')) {
@@ -33,13 +33,68 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Set Footer Year
+    // ===== FOOTER YEAR =====
     const yearElement = document.getElementById('year');
     if (yearElement) {
         yearElement.textContent = new Date().getFullYear();
     }
 
-    // Contact Form — submit via Formspree (AJAX)
+    // ===== CURSOR GLOW EFFECT =====
+    const cursorGlow = document.getElementById('cursorGlow');
+    if (cursorGlow) {
+        let mouseX = 0, mouseY = 0;
+        let glowX = 0, glowY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        function animateCursor() {
+            glowX += (mouseX - glowX) * 0.08;
+            glowY += (mouseY - glowY) * 0.08;
+            cursorGlow.style.left = glowX + 'px';
+            cursorGlow.style.top = glowY + 'px';
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+    }
+
+    // ===== FLOATING PARTICLES =====
+    const particlesContainer = document.getElementById('particles');
+    if (particlesContainer) {
+        const PARTICLE_COUNT = 28;
+        const colors = [
+            'rgba(14, 165, 233, 0.7)',
+            'rgba(56, 189, 248, 0.5)',
+            'rgba(249, 115, 22, 0.5)',
+            'rgba(253, 186, 116, 0.4)',
+            'rgba(6, 182, 212, 0.4)',
+        ];
+
+        for (let i = 0; i < PARTICLE_COUNT; i++) {
+            const p = document.createElement('div');
+            p.className = 'particle';
+            const size = 2 + Math.random() * 4;
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            const duration = 12 + Math.random() * 20;
+            const delay = Math.random() * 20;
+            const startX = Math.random() * 100;
+
+            p.style.cssText = `
+                width: ${size}px;
+                height: ${size}px;
+                background: ${color};
+                left: ${startX}vw;
+                animation-duration: ${duration}s;
+                animation-delay: -${delay}s;
+                box-shadow: 0 0 ${size * 3}px ${color};
+            `;
+            particlesContainer.appendChild(p);
+        }
+    }
+
+    // ===== CONTACT FORM (Formspree AJAX) =====
     const form = document.getElementById('contactForm');
     if (form) {
         form.addEventListener('submit', async (e) => {
@@ -49,7 +104,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const status = document.getElementById('formStatus');
             const originalText = btn.textContent;
 
-            // Loading state
             btn.textContent = 'Sending...';
             btn.disabled = true;
             status.style.display = 'none';
@@ -63,9 +117,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (response.ok) {
                     btn.textContent = 'Message Sent! ✓';
-                    btn.style.background = 'var(--accent-green)';
+                    btn.style.background = 'linear-gradient(135deg, #059669, #10b981)';
                     status.textContent = "Thanks! I'll get back to you soon.";
-                    status.style.color = 'var(--accent-green)';
+                    status.style.color = '#10b981';
                     status.style.display = 'block';
                     form.reset();
                 } else {
@@ -74,13 +128,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             } catch (error) {
                 btn.textContent = 'Failed to Send ✗';
-                btn.style.background = '#c0392b';
+                btn.style.background = 'linear-gradient(135deg, #c0392b, #e74c3c)';
                 status.textContent = error.message || 'Network error. Please try again.';
-                status.style.color = '#e74c3c';
+                status.style.color = '#f87171';
                 status.style.display = 'block';
             }
 
-            // Reset button after 4 seconds
             setTimeout(() => {
                 btn.textContent = originalText;
                 btn.style.background = '';
@@ -89,10 +142,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Intersection Observer for fade-in animations
+    // ===== SCROLL REVEAL (Intersection Observer) =====
     const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
+        threshold: 0.08,
+        rootMargin: '0px 0px -40px 0px'
     };
 
     const observer = new IntersectionObserver((entries) => {
@@ -109,7 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
     sections.forEach(section => {
         section.style.opacity = '0';
         section.style.transform = 'translateY(30px)';
-        section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        section.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
         observer.observe(section);
     });
 
@@ -117,89 +170,148 @@ document.addEventListener('DOMContentLoaded', () => {
     const cards = document.querySelectorAll('.card, .hobby-card');
     cards.forEach((card, index) => {
         card.style.opacity = '0';
-        card.style.transform = 'translateY(20px)';
-        card.style.transition = `opacity 0.5s ease ${index * 0.1}s, transform 0.5s ease ${index * 0.1}s`;
+        card.style.transform = 'translateY(24px)';
+        card.style.transition = `opacity 0.55s ease ${index * 0.08}s, transform 0.55s ease ${index * 0.08}s`;
         observer.observe(card);
     });
 
-    // ===== BAT SWARM ON BUTTON CLICK =====
-    const batSVG = '<svg viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12c1.5-3 4.5-5 8-5h0c.5-2 1-3.5 2-5 1 1.5 1.5 3 2 5h0c3.5 0 6.5 2 8 5-0-5.5-4.5-10-10-10z"/></svg>';
-
-    function spawnBatSwarm(originX, originY) {
-        const container = document.getElementById('batSwarm');
-        if (!container) return;
-
-        const batCount = 35;
-
-        for (let i = 0; i < batCount; i++) {
-            const bat = document.createElement('div');
-            bat.className = 'swarm-bat';
-            bat.innerHTML = batSVG;
-
-            // Random size — much bigger now
-            const size = 24 + Math.random() * 50;
-            bat.style.fontSize = size + 'px';
-
-            // Start from click origin
-            bat.style.left = originX + 'px';
-            bat.style.top = originY + 'px';
-
-            container.appendChild(bat);
-
-            // Random flight direction and distance
-            const angle = Math.random() * Math.PI * 2;
-            const distance = 400 + Math.random() * 800;
-            const endX = originX + Math.cos(angle) * distance;
-            const endY = originY + Math.sin(angle) * distance - Math.random() * 300;
-            const duration = 900 + Math.random() * 1400;
-            const delay = Math.random() * 400;
-
-            // Flip direction based on movement
-            if (endX < originX) {
-                bat.style.transform = 'scaleX(-1)';
-            }
-
-            // Animate using Web Animation API
-            const animation = bat.animate([
-                {
-                    left: originX + 'px',
-                    top: originY + 'px',
-                    opacity: 0,
-                    transform: `scaleX(${endX < originX ? -1 : 1}) scale(0.3)`
-                },
-                {
-                    opacity: 1,
-                    offset: 0.1
-                },
-                {
-                    opacity: 0.9,
-                    offset: 0.5
-                },
-                {
-                    left: endX + 'px',
-                    top: endY + 'px',
-                    opacity: 0,
-                    transform: `scaleX(${endX < originX ? -1 : 1}) scale(1) rotate(${(Math.random() - 0.5) * 40}deg)`
+    // Animate about card
+    const aboutCard = document.querySelector('.about-card');
+    if (aboutCard) {
+        aboutCard.style.opacity = '0';
+        aboutCard.style.transform = 'translateY(30px)';
+        aboutCard.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+        const aboutObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
                 }
-            ], {
-                duration: duration,
-                delay: delay,
-                easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-                fill: 'forwards'
             });
-
-            animation.onfinish = () => bat.remove();
-        }
+        }, { threshold: 0.1 });
+        aboutObserver.observe(aboutCard);
     }
 
-    // Attach bat swarm to all buttons and clickable links
-    const clickables = document.querySelectorAll('.btn-primary, .btn-secondary, .btn-nav, .social-icon, .card-link, .hobby-card, .explore-btn');
-    clickables.forEach(el => {
-        el.addEventListener('click', (e) => {
-            const rect = el.getBoundingClientRect();
-            const x = rect.left + rect.width / 2;
-            const y = rect.top + rect.height / 2;
-            spawnBatSwarm(x, y);
+    // Animate subpage card
+    const subpageCard = document.querySelector('.subpage-card');
+    if (subpageCard) {
+        subpageCard.style.opacity = '0';
+        subpageCard.style.transform = 'translateY(30px) scale(0.98)';
+        subpageCard.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+        setTimeout(() => {
+            subpageCard.style.opacity = '1';
+            subpageCard.style.transform = 'translateY(0) scale(1)';
+        }, 200);
+    }
+
+    // ===== MAGNETIC BUTTON EFFECT =====
+    const magneticBtns = document.querySelectorAll('.btn-primary, .btn-secondary, .btn-nav');
+    magneticBtns.forEach(btn => {
+        btn.addEventListener('mousemove', (e) => {
+            const rect = btn.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+            btn.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px) translateY(-2px)`;
+        });
+
+        btn.addEventListener('mouseleave', () => {
+            btn.style.transform = '';
         });
     });
+
+    // ===== RIPPLE EFFECT ON BUTTONS =====
+    const rippleBtns = document.querySelectorAll('.btn-primary, .btn-secondary, .explore-btn');
+    rippleBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const ripple = document.createElement('span');
+            const rect = btn.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = e.clientX - rect.left - size / 2;
+            const y = e.clientY - rect.top - size / 2;
+
+            ripple.style.cssText = `
+                position: absolute;
+                width: ${size}px;
+                height: ${size}px;
+                left: ${x}px;
+                top: ${y}px;
+                background: rgba(255,255,255,0.15);
+                border-radius: 50%;
+                transform: scale(0);
+                animation: rippleAnim 0.6s ease-out forwards;
+                pointer-events: none;
+                z-index: 10;
+            `;
+
+            // Inject animation if not already present
+            if (!document.getElementById('rippleStyle')) {
+                const style = document.createElement('style');
+                style.id = 'rippleStyle';
+                style.textContent = `
+                    @keyframes rippleAnim {
+                        to { transform: scale(2.5); opacity: 0; }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+
+            // Make parent relative for absolute child
+            const position = window.getComputedStyle(btn).position;
+            if (position === 'static') btn.style.position = 'relative';
+            btn.style.overflow = 'hidden';
+
+            btn.appendChild(ripple);
+            ripple.addEventListener('animationend', () => ripple.remove());
+        });
+    });
+
+    // ===== ACTIVE NAV LINK HIGHLIGHT =====
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    document.querySelectorAll('.nav-links a:not(.btn-nav)').forEach(link => {
+        const href = link.getAttribute('href');
+        if (href === currentPage || (currentPage === '' && href === 'index.html')) {
+            link.style.color = 'var(--accent-violet-light)';
+            link.style.background = 'rgba(14, 165, 233, 0.1)';
+        }
+    });
+
+    // ===== TECH NEWS FETCHER =====
+    const newsList = document.getElementById('newsList');
+    if (newsList) {
+        async function fetchTechNews() {
+            try {
+                // Fetch top programming articles from DEV.to API
+                const response = await fetch('https://dev.to/api/articles?tag=programming&top=1&per_page=10');
+                if (!response.ok) throw new Error('Network response was not ok');
+                const articles = await response.json();
+                
+                if (articles && articles.length > 0) {
+                    newsList.innerHTML = ''; // Clear loading
+                    
+                    // Create list items
+                    const createHTML = () => {
+                        return articles.map(article => `
+                            <li>
+                                <a href="${article.url}" target="_blank">${article.title}</a>
+                                <div class="news-meta">
+                                    <i class="fa-solid fa-heart" style="color:#e25555; margin-right:4px;"></i>${article.public_reactions_count} 
+                                    &nbsp;·&nbsp; ${article.readable_publish_date}
+                                </div>
+                            </li>
+                        `).join('');
+                    };
+                    
+                    // Duplicate for seamless infinite scroll
+                    newsList.innerHTML = createHTML() + createHTML();
+                } else {
+                    newsList.innerHTML = '<li>No news available at the moment.</li>';
+                }
+            } catch (error) {
+                console.error('Error fetching news:', error);
+                newsList.innerHTML = '<li><i class="fa-solid fa-triangle-exclamation"></i> Failed to load news feed.</li>';
+            }
+        }
+        
+        fetchTechNews();
+    }
 });
