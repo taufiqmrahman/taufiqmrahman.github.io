@@ -4,35 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Photography | Taufiq Mustafizur Rahman</title>
+    <meta name="description" content="Photography by Taufiq Mustafizur Rahman — visual storytelling and moments captured.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    <style>
-        .subpage-bg {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background-image: url('https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=2000&auto=format&fit=crop');
-            background-size: cover; background-position: center;
-            opacity: 0.28; z-index: -2;
-        }
-        .subpage-content { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 6rem 2rem 4rem; flex-direction: column; text-align: center; gap: 2rem; }
-        .subpage-card { max-width: 600px; width: 100%; padding: 3.5rem; background: var(--bg-card); border: 1px solid var(--glass-border); border-radius: var(--radius-lg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); box-shadow: 0 20px 50px rgba(0,0,0,0.3); }
-        .subpage-card h1 { font-size: 2.5rem; margin-bottom: 1rem; color: var(--text-primary); }
-        .subpage-card p { color: var(--text-secondary); margin-bottom: 2rem; line-height: 1.7; }
-    </style>
 </head>
 <body>
-    <div class="glow-blob glow-blob-1"></div>
-    <div class="glow-blob glow-blob-2"></div>
-    <div class="subpage-bg"></div>
+    <div class="portfolio-bg">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+    <div class="particles-container" id="particles"></div>
+    <div class="cursor-glow" id="cursorGlow"></div>
+    <div class="subpage-bg" style="background-image: url('https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=2000&auto=format&fit=crop');"></div>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">TMR</a>
+            <ul class="nav-links">
+                <li><a href="about.html">About</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="hobbies.html">Hobbies</a></li>
+                <li><a href="connect.html" class="btn-nav">Let's Connect</a></li>
+            </ul>
+            <div class="hamburger"><span></span><span></span><span></span></div>
+        </div>
+    </nav>
+
     <div class="subpage-content">
         <div class="subpage-card">
             <h1>📷 Photography</h1>
             <p>Capturing moments and exploring visual storytelling. Check out my latest shots on Instagram.</p>
-            <a href="https://www.instagram.com/photosbybatsy/" class="btn-primary glow-btn" target="_blank"><i class="fa-brands fa-instagram"></i> @photosbybatsy</a>
+            <a href="https://www.instagram.com/photosbybatsy/" class="btn-primary glow-btn" target="_blank" id="photosInstagramBtn"><i class="fa-brands fa-instagram"></i> @photosbybatsy</a>
         </div>
         <a href="hobbies.html" class="btn-secondary">← Back to Hobbies</a>
     </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
