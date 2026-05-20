@@ -4,45 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projects | Taufiq Mustafizur Rahman</title>
-    <meta name="description" content="Projects by Taufiq Mustafizur Rahman - Multithreaded Process Manager, Hospital Management System, and more.">
+    <meta name="description" content="Projects by Taufiq Mustafizur Rahman — Multithreaded Process Manager, Hospital Management System, and more.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Gotham Cityscape Background -->
-    <div class="gotham-bg">
-        <div class="gotham-skyline"></div>
-        <div class="gotham-fog"></div>
-        <div class="gotham-cloud cloud-1"></div>
-        <div class="gotham-cloud cloud-2"></div>
-        <div class="gotham-cloud cloud-3"></div>
-        <div class="gotham-cloud cloud-4"></div>
-        <div class="gotham-cloud cloud-5"></div>
-        <div class="spotlight spotlight-1"></div>
-        <div class="spotlight spotlight-2"></div>
-        <div class="bat-signal">
-            <img src="batsignal.png" alt="Bat Signal">
-        </div>
+    <!-- Animated Background -->
+    <div class="portfolio-bg">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+        <div class="orb orb-4"></div>
     </div>
 
-    <!-- Bat Swarm Container -->
-    <div class="bat-swarm-container" id="batSwarm"></div>
-
-    <!-- Ambient Glow Blobs -->
-    <div class="glow-blob glow-blob-1"></div>
-    <div class="glow-blob glow-blob-2"></div>
-    <div class="glow-blob glow-blob-3"></div>
-
-    <!-- Animated Bats -->
-    <div class="bat-container">
-        <div class="bat bat-1"><svg viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12c1.5-3 4.5-5 8-5h0c.5-2 1-3.5 2-5 1 1.5 1.5 3 2 5h0c3.5 0 6.5 2 8 5-0-5.5-4.5-10-10-10z" /></svg></div>
-        <div class="bat bat-2"><svg viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12c1.5-3 4.5-5 8-5h0c.5-2 1-3.5 2-5 1 1.5 1.5 3 2 5h0c3.5 0 6.5 2 8 5-0-5.5-4.5-10-10-10z" /></svg></div>
-        <div class="bat bat-3"><svg viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12c1.5-3 4.5-5 8-5h0c.5-2 1-3.5 2-5 1 1.5 1.5 3 2 5h0c3.5 0 6.5 2 8 5-0-5.5-4.5-10-10-10z" /></svg></div>
-        <div class="bat bat-4"><svg viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12c1.5-3 4.5-5 8-5h0c.5-2 1-3.5 2-5 1 1.5 1.5 3 2 5h0c3.5 0 6.5 2 8 5-0-5.5-4.5-10-10-10z" /></svg></div>
-    </div>
+    <div class="particles-container" id="particles"></div>
+    <div class="cursor-glow" id="cursorGlow"></div>
 
     <nav class="navbar">
         <div class="nav-container">
@@ -65,10 +44,10 @@
         <section id="projects" class="section" style="padding-top: 8rem;">
             <h2 class="section-title">Projects</h2>
             <div class="projects-grid">
-                <div class="card glassmorphism">
+                <div class="card">
+                    <div class="card-number">// 01</div>
                     <h3>Multithreaded Process Manager Simulator</h3>
-                    <p>Built an interactive browser-based OS kernel visualizer simulating process lifecycles,
-                        parent-child relationships, and concurrency.</p>
+                    <p>Built an interactive browser-based OS kernel visualizer simulating process lifecycles, parent-child relationships, and concurrency.</p>
                     <div class="tags">
                         <span>C</span>
                         <span>pthreads</span>
@@ -76,10 +55,10 @@
                     </div>
                     <a href="https://processsvis.netlify.app/" target="_blank" class="card-link">View Project →</a>
                 </div>
-                <div class="card glassmorphism">
+                <div class="card">
+                    <div class="card-number">// 02</div>
                     <h3>Hospital Management System</h3>
-                    <p>Developed a full-stack application to digitize core hospital operations including patient
-                        records, appointments, and billing.</p>
+                    <p>Developed a full-stack application to digitize core hospital operations including patient records, appointments, and billing.</p>
                     <div class="tags">
                         <span>React</span>
                         <span>Node.js</span>
@@ -87,10 +66,10 @@
                     </div>
                     <a href="https://ehospitalsheba.netlify.app/" target="_blank" class="card-link">View Project →</a>
                 </div>
-                <div class="card glassmorphism">
+                <div class="card">
+                    <div class="card-number">// 03</div>
                     <h3>TicTacToe (Java Desktop App)</h3>
-                    <p>Built a fully functional TicTacToe desktop game. Packaged and released as a standalone executable
-                        (.exe) for easy distribution.</p>
+                    <p>Built a fully functional TicTacToe desktop game. Packaged and released as a standalone executable (.exe) for easy distribution.</p>
                     <div class="tags">
                         <span>Java</span>
                         <span>OOP</span>
@@ -106,7 +85,7 @@
     </main>
 
     <footer>
-        <p>© <span id="year"></span> Taufiq Mustafizur Rahman </p>
+        <p>© <span id="year"></span> Taufiq Mustafizur Rahman &nbsp;·&nbsp; Built with <span class="heart">♥</span> and code.</p>
     </footer>
 
     <script src="script.js"></script>
