@@ -377,6 +377,7 @@ main {
     gap: 4rem;
     width: 100%;
     position: relative;
+    flex-direction: row-reverse;
 }
 
 /* ===== HERO IMAGE — PASSPORT STYLE ===== */
