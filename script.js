@@ -274,44 +274,4 @@ document.addEventListener('DOMContentLoaded', () => {
             link.style.background = 'rgba(14, 165, 233, 0.1)';
         }
     });
-
-    // ===== TECH NEWS FETCHER =====
-    const newsList = document.getElementById('newsList');
-    if (newsList) {
-        async function fetchTechNews() {
-            try {
-                // Fetch top programming articles from DEV.to API
-                const response = await fetch('https://dev.to/api/articles?tag=programming&top=1&per_page=10');
-                if (!response.ok) throw new Error('Network response was not ok');
-                const articles = await response.json();
-                
-                if (articles && articles.length > 0) {
-                    newsList.innerHTML = ''; // Clear loading
-                    
-                    // Create list items
-                    const createHTML = () => {
-                        return articles.map(article => `
-                            <li>
-                                <a href="${article.url}" target="_blank">${article.title}</a>
-                                <div class="news-meta">
-                                    <i class="fa-solid fa-heart" style="color:#e25555; margin-right:4px;"></i>${article.public_reactions_count} 
-                                    &nbsp;·&nbsp; ${article.readable_publish_date}
-                                </div>
-                            </li>
-                        `).join('');
-                    };
-                    
-                    // Duplicate for seamless infinite scroll
-                    newsList.innerHTML = createHTML() + createHTML();
-                } else {
-                    newsList.innerHTML = '<li>No news available at the moment.</li>';
-                }
-            } catch (error) {
-                console.error('Error fetching news:', error);
-                newsList.innerHTML = '<li><i class="fa-solid fa-triangle-exclamation"></i> Failed to load news feed.</li>';
-            }
-        }
-        
-        fetchTechNews();
-    }
 });
