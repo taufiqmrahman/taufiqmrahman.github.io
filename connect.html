@@ -1,31 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Let's Connect | Taufiq Mustafizur Rahman</title>
     <meta name="description" content="Get in touch with Taufiq Mustafizur Rahman — social links and contact form.">
+    <script>(function(){var t=localStorage.getItem('tmr-theme')||'light';document.documentElement.setAttribute('data-theme',t);document.documentElement.classList.add('no-transition');window.addEventListener('DOMContentLoaded',function(){setTimeout(function(){document.documentElement.classList.remove('no-transition');},50);});}());</script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <!-- Animated Background -->
-    <div class="portfolio-bg">
-        <div class="orb orb-1"></div>
-        <div class="orb orb-2"></div>
-        <div class="orb orb-3"></div>
-        <div class="orb orb-4"></div>
-    </div>
 
-    <div class="particles-container" id="particles"></div>
-    <div class="cursor-glow" id="cursorGlow"></div>
+<body>
+    <div class="page-border page-border-top"></div>
+    <div class="page-border page-border-bottom"></div>
+    <div class="page-border page-border-left"></div>
+    <div class="page-border page-border-right"></div>
+
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+        <i class="fa-solid fa-moon"></i>
+    </button>
 
     <nav class="navbar">
         <div class="nav-container">
-            <a href="index.html" class="logo">TMR</a>
+            <a href="index.html" class="logo">TMR.</a>
             <ul class="nav-links">
                 <li><a href="about.html">About</a></li>
                 <li><a href="projects.html">Projects</a></li>
@@ -40,23 +41,46 @@
         </div>
     </nav>
 
-    <main>
-        <section id="contact" class="section" style="padding-top: 8rem;">
-            <h2 class="section-title">Let's Connect</h2>
-            <div class="contact-container glassmorphism">
-                <div class="contact-info" id="socials">
-                    <p>I'm always open to discussing new projects, creative ideas or opportunities to be part of your visions.</p>
-                    <div class="social-links">
-                        <a href="https://github.com/taufiqmrahman" target="_blank" class="social-icon social-github"><i class="fa-brands fa-github"></i> GitHub</a>
-                        <a href="https://www.linkedin.com/in/taufiq222/" target="_blank" class="social-icon social-linkedin"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
-                        <a href="https://www.facebook.com/Letthebatbewithyou" target="_blank" class="social-icon social-facebook"><i class="fa-brands fa-facebook"></i> Facebook</a>
-                        <a href="https://www.instagram.com/letthebatbewithyou/" target="_blank" class="social-icon social-instagram"><i class="fa-brands fa-instagram"></i> Instagram</a>
-                        <a href="https://letterboxd.com/darkknight_exe/" target="_blank" class="social-icon social-letterboxd"><i class="fa-solid fa-film"></i> Letterboxd</a>
-                        <a href="https://open.spotify.com/user/31wwhp4rhueq36bjptexk4fy2ndi?si=0b77aac83c774318" target="_blank" class="social-icon social-spotify"><i class="fa-brands fa-spotify"></i> Spotify</a>
-                        <a href="mailto:taufiq222003@gmail.com" class="social-icon social-email"><i class="fa-solid fa-envelope"></i> Email</a>
-                    </div>
+    <div class="connect-page">
+
+        <div class="connect-header fade-in">
+            <p class="connect-pretitle">// reach out</p>
+            <h1 class="connect-title">Let's Connect</h1>
+        </div>
+
+        <div class="connect-body">
+
+            <div class="connect-info fade-in" id="socials">
+                <p>I'm always open to discussing new projects, creative ideas, or opportunities to be part of your visions. Don't hesitate to reach out.</p>
+
+                <div class="social-links">
+                    <a href="https://github.com/taufiqmrahman" target="_blank" class="social-icon">
+                        <i class="fa-brands fa-github"></i> GitHub
+                    </a>
+                    <a href="https://www.linkedin.com/in/taufiq222/" target="_blank" class="social-icon">
+                        <i class="fa-brands fa-linkedin"></i> LinkedIn
+                    </a>
+                    <a href="https://www.facebook.com/Letthebatbewithyou" target="_blank" class="social-icon">
+                        <i class="fa-brands fa-facebook"></i> Facebook
+                    </a>
+                    <a href="https://www.instagram.com/letthebatbewithyou/" target="_blank" class="social-icon">
+                        <i class="fa-brands fa-instagram"></i> Instagram
+                    </a>
+                    <a href="https://letterboxd.com/darkknight_exe/" target="_blank" class="social-icon">
+                        <i class="fa-solid fa-film"></i> Letterboxd
+                    </a>
+                    <a href="https://open.spotify.com/user/31wwhp4rhueq36bjptexk4fy2ndi?si=0b77aac83c774318" target="_blank" class="social-icon">
+                        <i class="fa-brands fa-spotify"></i> Spotify
+                    </a>
+                    <a href="mailto:taufiq222003@gmail.com" class="social-icon">
+                        <i class="fa-solid fa-envelope"></i> Email
+                    </a>
                 </div>
+            </div>
+
+            <div class="fade-in">
                 <form class="contact-form" id="contactForm" action="https://formspree.io/f/xzdoprov" method="POST">
+                    <div class="contact-form-title">Send a message</div>
                     <div class="form-group">
                         <input type="text" name="name" id="name" placeholder="Your Name" required>
                     </div>
@@ -66,20 +90,24 @@
                     <div class="form-group">
                         <textarea name="message" id="message" rows="5" placeholder="Your Message" required></textarea>
                     </div>
-                    <button type="submit" class="btn-primary glow-btn" id="contactSubmitBtn">Send Message →</button>
-                    <p id="formStatus" style="margin-top: 1rem; font-size: 0.9rem; display: none;"></p>
+                    <button type="submit" class="btn-primary" id="contactSubmitBtn">Send Message →</button>
+                    <p id="formStatus" style="margin-top: 0.8rem; font-size: 0.88rem; display: none;"></p>
                 </form>
             </div>
-            <div style="text-align: center; margin-top: 3rem;">
-                <a href="index.html" class="btn-secondary">← Back to Home</a>
-            </div>
-        </section>
-    </main>
+
+        </div>
+
+        <div style="margin-top: 3rem;" class="fade-in">
+            <a href="index.html" class="btn-secondary">← Back to Home</a>
+        </div>
+
+    </div>
 
     <footer>
-        <p>© <span id="year"></span> Taufiq Mustafizur Rahman </p>
+        <p>© <span id="year"></span> Taufiq Mustafizur Rahman</p>
     </footer>
 
     <script src="script.js"></script>
 </body>
+
 </html>
