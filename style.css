@@ -1126,6 +1126,8 @@ footer .heart {
         top: 1rem;
     }
 
+    .page-border { display: none; }
+
     .hamburger { display: flex; z-index: 1001; }
 
     .nav-links {
