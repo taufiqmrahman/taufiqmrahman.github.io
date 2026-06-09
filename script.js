@@ -568,10 +568,37 @@ function initDoodles() {
     }
 
     let resizeTimer;
+    let prevWidth = 0;
+
+    function handleResize() {
+        const newW = window.innerWidth;
+        const newH = window.innerHeight;
+        canvas.width  = newW;
+        canvas.height = newH;
+
+        // Only regenerate doodles if width actually changed (not height-only from mobile address bar)
+        if (newW !== prevWidth) {
+            prevWidth = newW;
+            W = newW;
+            H = newH;
+            buildParticles();
+        } else {
+            W = newW;
+            H = newH;
+        }
+    }
+
     window.addEventListener('resize', () => {
         clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(() => { resize(); }, 150);
+        resizeTimer = setTimeout(handleResize, 150);
     }, { passive: true });
-    resize();
+
+    // Initial setup
+    W = window.innerWidth;
+    H = window.innerHeight;
+    canvas.width  = W;
+    canvas.height = H;
+    prevWidth = W;
+    buildParticles();
     tick();
 }
