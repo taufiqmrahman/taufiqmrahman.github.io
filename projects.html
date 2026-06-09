@@ -1,31 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projects | Taufiq Mustafizur Rahman</title>
     <meta name="description" content="Projects by Taufiq Mustafizur Rahman — Multithreaded Process Manager, Hospital Management System, and more.">
+    <script>(function(){var t=localStorage.getItem('tmr-theme')||'light';document.documentElement.setAttribute('data-theme',t);document.documentElement.classList.add('no-transition');window.addEventListener('DOMContentLoaded',function(){setTimeout(function(){document.documentElement.classList.remove('no-transition');},50);});}());</script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <!-- Animated Background -->
-    <div class="portfolio-bg">
-        <div class="orb orb-1"></div>
-        <div class="orb orb-2"></div>
-        <div class="orb orb-3"></div>
-        <div class="orb orb-4"></div>
-    </div>
 
-    <div class="particles-container" id="particles"></div>
-    <div class="cursor-glow" id="cursorGlow"></div>
+<body>
+    <div class="page-border page-border-top"></div>
+    <div class="page-border page-border-bottom"></div>
+    <div class="page-border page-border-left"></div>
+    <div class="page-border page-border-right"></div>
+
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+        <i class="fa-solid fa-moon"></i>
+    </button>
 
     <nav class="navbar">
         <div class="nav-container">
-            <a href="index.html" class="logo">TMR</a>
+            <a href="index.html" class="logo">TMR.</a>
             <ul class="nav-links">
                 <li><a href="about.html">About</a></li>
                 <li><a href="projects.html">Projects</a></li>
@@ -40,54 +41,72 @@
         </div>
     </nav>
 
-    <main>
-        <section id="projects" class="section" style="padding-top: 8rem;">
-            <h2 class="section-title">Projects</h2>
-            <div class="projects-grid">
-                <div class="card">
-                    <div class="card-number">// 01</div>
-                    <h3>Multithreaded Process Manager Simulator</h3>
-                    <p>Built an interactive browser-based OS kernel visualizer simulating process lifecycles, parent-child relationships, and concurrency.</p>
-                    <div class="tags">
-                        <span>C</span>
-                        <span>pthreads</span>
-                        <span>Semaphores</span>
-                    </div>
-                    <a href="https://processsvis.netlify.app/" target="_blank" class="card-link">View Project →</a>
-                </div>
-                <div class="card">
-                    <div class="card-number">// 02</div>
-                    <h3>Hospital Management System</h3>
-                    <p>Developed a full-stack application to digitize core hospital operations including patient records, appointments, and billing.</p>
-                    <div class="tags">
-                        <span>React</span>
-                        <span>Node.js</span>
-                        <span>MySQL</span>
-                    </div>
-                    <a href="https://ehospitalsheba.netlify.app/" target="_blank" class="card-link">View Project →</a>
-                </div>
-                <div class="card">
-                    <div class="card-number">// 03</div>
-                    <h3>TicTacToe (Java Desktop App)</h3>
-                    <p>Built a fully functional TicTacToe desktop game. Packaged and released as a standalone executable (.exe) for easy distribution.</p>
-                    <div class="tags">
-                        <span>Java</span>
-                        <span>OOP</span>
-                        <span>Swing</span>
-                    </div>
-                    <a href="https://github.com/taufiqmrahman/TicTacToe" target="_blank" class="card-link">View Project →</a>
-                </div>
+    <main class="page-wrapper">
+        <section class="section">
+
+            <div class="section-header fade-in">
+                <h1 class="section-title">Projects</h1>
+                <p class="section-subtitle">// things I've built</p>
             </div>
-            <div style="text-align: center; margin-top: 3rem;">
+
+            <div class="projects-list fade-in">
+
+                <a href="https://processsvis.netlify.app/" target="_blank" class="project-card" id="projectProcessManager">
+                    <div class="project-info">
+                        <div class="project-number">// 01</div>
+                        <h3>Multithreaded Process Manager Simulator</h3>
+                        <p>An interactive browser-based OS kernel visualizer simulating process lifecycles, parent-child relationships, and concurrency in real time.</p>
+                        <div class="tags">
+                            <span>C</span>
+                            <span>pthreads</span>
+                            <span>Semaphores</span>
+                        </div>
+                    </div>
+                    <span class="project-arrow">→</span>
+                </a>
+
+                <a href="https://ehospitalsheba.netlify.app/" target="_blank" class="project-card" id="projectHospital">
+                    <div class="project-info">
+                        <div class="project-number">// 02</div>
+                        <h3>Hospital Management System</h3>
+                        <p>A full-stack application to digitize core hospital operations including patient records, appointment scheduling, and billing workflows.</p>
+                        <div class="tags">
+                            <span>React</span>
+                            <span>Node.js</span>
+                            <span>MySQL</span>
+                        </div>
+                    </div>
+                    <span class="project-arrow">→</span>
+                </a>
+
+                <a href="https://github.com/taufiqmrahman/TicTacToe" target="_blank" class="project-card" id="projectTicTacToe">
+                    <div class="project-info">
+                        <div class="project-number">// 03</div>
+                        <h3>TicTacToe — Java Desktop App</h3>
+                        <p>A fully functional TicTacToe desktop game packaged and released as a standalone executable (.exe) for easy distribution.</p>
+                        <div class="tags">
+                            <span>Java</span>
+                            <span>OOP</span>
+                            <span>Swing</span>
+                        </div>
+                    </div>
+                    <span class="project-arrow">→</span>
+                </a>
+
+            </div>
+
+            <div style="text-align: center; margin-top: 3rem;" class="fade-in">
                 <a href="index.html" class="btn-secondary">← Back to Home</a>
             </div>
+
         </section>
     </main>
 
     <footer>
-        <p>© <span id="year"></span> Taufiq Mustafizur Rahman </p>
+        <p>© <span id="year"></span> Taufiq Mustafizur Rahman</p>
     </footer>
 
     <script src="script.js"></script>
 </body>
+
 </html>
