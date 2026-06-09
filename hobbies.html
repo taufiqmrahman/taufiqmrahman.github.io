@@ -1,31 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hobbies & Interests | Taufiq Mustafizur Rahman</title>
     <meta name="description" content="Hobbies and interests of Taufiq Mustafizur Rahman — Photography, Movies, Racing, Gaming, Reading, and Music.">
+    <script>(function(){var t=localStorage.getItem('tmr-theme')||'light';document.documentElement.setAttribute('data-theme',t);document.documentElement.classList.add('no-transition');window.addEventListener('DOMContentLoaded',function(){setTimeout(function(){document.documentElement.classList.remove('no-transition');},50);});}());</script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <!-- Animated Background -->
-    <div class="portfolio-bg">
-        <div class="orb orb-1"></div>
-        <div class="orb orb-2"></div>
-        <div class="orb orb-3"></div>
-        <div class="orb orb-4"></div>
-    </div>
 
-    <div class="particles-container" id="particles"></div>
-    <div class="cursor-glow" id="cursorGlow"></div>
+<body>
+    <div class="page-border page-border-top"></div>
+    <div class="page-border page-border-bottom"></div>
+    <div class="page-border page-border-left"></div>
+    <div class="page-border page-border-right"></div>
+
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+        <i class="fa-solid fa-moon"></i>
+    </button>
 
     <nav class="navbar">
         <div class="nav-container">
-            <a href="index.html" class="logo">TMR</a>
+            <a href="index.html" class="logo">TMR.</a>
             <ul class="nav-links">
                 <li><a href="about.html">About</a></li>
                 <li><a href="projects.html">Projects</a></li>
@@ -40,51 +41,65 @@
         </div>
     </nav>
 
-    <main>
-        <section id="hobbies" class="section" style="padding-top: 8rem;">
-            <h2 class="section-title">Hobbies & Interests</h2>
-            <div class="hobbies-grid">
-                <a href="photography.html" class="hobby-card">
+    <main class="page-wrapper">
+        <section class="section">
+
+            <div class="section-header fade-in">
+                <h1 class="section-title">Hobbies &amp; Interests</h1>
+                <p class="section-subtitle">// life beyond the screen</p>
+            </div>
+
+            <div class="hobbies-grid fade-in">
+                <a href="photography.html" class="hobby-card" id="hobbyPhotography">
+                    <span class="hobby-arrow">↗</span>
                     <span class="hobby-icon">📷</span>
                     <h3>Photography</h3>
                     <p>Capturing moments and visual storytelling.</p>
                 </a>
-                <a href="movies.html" class="hobby-card">
+                <a href="movies.html" class="hobby-card" id="hobbyMovies">
+                    <span class="hobby-arrow">↗</span>
                     <span class="hobby-icon">🎬</span>
                     <h3>Movies</h3>
                     <p>Cinematography and great narratives.</p>
                 </a>
-                <a href="racing.html" class="hobby-card">
+                <a href="racing.html" class="hobby-card" id="hobbyRacing">
+                    <span class="hobby-arrow">↗</span>
                     <span class="hobby-icon">🏎️</span>
                     <h3>Racing</h3>
                     <p>Motorsports and speed engineering.</p>
                 </a>
-                <a href="gaming.html" class="hobby-card">
+                <a href="gaming.html" class="hobby-card" id="hobbyGaming">
+                    <span class="hobby-arrow">↗</span>
                     <span class="hobby-icon">🎮</span>
                     <h3>Gaming</h3>
                     <p>Interactive worlds and competitive play.</p>
                 </a>
-                <a href="reading.html" class="hobby-card">
+                <a href="reading.html" class="hobby-card" id="hobbyReading">
+                    <span class="hobby-arrow">↗</span>
                     <span class="hobby-icon">📚</span>
                     <h3>Reading</h3>
                     <p>Sci-fi, fantasy, and technical literature.</p>
                 </a>
-                <a href="music.html" class="hobby-card">
+                <a href="music.html" class="hobby-card" id="hobbyMusic">
+                    <span class="hobby-arrow">↗</span>
                     <span class="hobby-icon">🎵</span>
                     <h3>Music</h3>
                     <p>Discovering sounds and perfect playlists.</p>
                 </a>
             </div>
-            <div style="text-align: center; margin-top: 3rem;">
+
+            <div style="text-align: center; margin-top: 3rem;" class="fade-in">
                 <a href="index.html" class="btn-secondary">← Back to Home</a>
             </div>
+
         </section>
     </main>
 
     <footer>
-        <p>© <span id="year"></span> Taufiq Mustafizur Rahman </p>
+        <p>© <span id="year"></span> Taufiq Mustafizur Rahman</p>
     </footer>
 
     <script src="script.js"></script>
 </body>
+
 </html>
