@@ -143,7 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // ================================================================
-//  STATIC BACKGROUND DOODLES — placed in gutters, no movement
+//  STATIC BACKGROUND DOODLES — deterministic placement, fixed icons
 // ================================================================
 function initDoodles() {
 
@@ -152,6 +152,17 @@ function initDoodles() {
     canvas.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:0;pointer-events:none';
     document.body.insertBefore(canvas, document.body.firstChild);
     const ctx = canvas.getContext('2d');
+
+    // ── Seeded PRNG (deterministic — same result every load) ─────
+    function seededRandom(seed) {
+        let s = seed;
+        return function() {
+            s = (s * 16807 + 0) % 2147483647;
+            return (s - 1) / 2147483646;
+        };
+    }
+    const SEED = 314159;  // fixed seed — never changes
+    let rng = seededRandom(SEED);
 
     // ── colour helper ────────────────────────────────────────────
     function getColor(alpha) {
@@ -168,6 +179,7 @@ function initDoodles() {
 
     // ── icon drawers (centred at 0,0, scaled by s) ───────────────
 
+    // 1. PC Monitor
     function drawMonitor(ctx, s, a) {
         applyStyle(ctx, a, s * 0.09);
         const W = s*2, H = s*1.4, r = s*0.12, pad = s*0.2;
@@ -177,6 +189,7 @@ function initDoodles() {
         ctx.beginPath(); ctx.moveTo(-s*0.6,H/2+s*0.4); ctx.lineTo(s*0.6,H/2+s*0.4); ctx.stroke();
     }
 
+    // 2. Processor / CPU
     function drawCPU(ctx, s, a) {
         applyStyle(ctx, a, s*0.09);
         const W = s*1.8, pins = 4, pinLen = s*0.45, gap = W/(pins+1);
@@ -196,6 +209,36 @@ function initDoodles() {
         }
     }
 
+    // 3. Headphones
+    function drawHeadphones(ctx, s, a) {
+        applyStyle(ctx, a, s*0.1);
+        const r = s*1.0;
+        ctx.beginPath(); ctx.arc(0,0,r,Math.PI,0); ctx.stroke();
+        ctx.beginPath(); ctx.ellipse(-r,s*0.1,s*0.32,s*0.5,0,0,Math.PI*2); ctx.stroke();
+        ctx.beginPath(); ctx.ellipse( r,s*0.1,s*0.32,s*0.5,0,0,Math.PI*2); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(-r,-s*0.05); ctx.lineTo(-r,-r*0.92); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo( r,-s*0.05); ctx.lineTo( r,-r*0.92); ctx.stroke();
+    }
+
+    // 4. Camera
+    function drawCamera(ctx, s, a) {
+        applyStyle(ctx, a, s*0.09);
+        const W = s*2.4, H = s*1.6, r = s*0.15;
+        // Body
+        ctx.beginPath(); ctx.roundRect(-W/2,-H/2,W,H,r); ctx.stroke();
+        // Lens (big circle)
+        ctx.beginPath(); ctx.arc(-s*0.1,0,s*0.55,0,Math.PI*2); ctx.stroke();
+        // Inner lens
+        ctx.beginPath(); ctx.arc(-s*0.1,0,s*0.28,0,Math.PI*2); ctx.stroke();
+        // Lens dot
+        ctx.beginPath(); ctx.arc(-s*0.1,0,s*0.08,0,Math.PI*2); ctx.fill();
+        // Viewfinder bump
+        ctx.beginPath(); ctx.roundRect(s*0.15,-H/2-s*0.28,s*0.55,s*0.3,s*0.06); ctx.stroke();
+        // Flash
+        ctx.beginPath(); ctx.arc(W/2-s*0.35,-H/2+s*0.3,s*0.12,0,Math.PI*2); ctx.stroke();
+    }
+
+    // 5. RAM
     function drawRAM(ctx, s, a) {
         applyStyle(ctx, a, s*0.09);
         const W = s*3.2, H = s*1.1;
@@ -210,285 +253,207 @@ function initDoodles() {
         ctx.stroke();
     }
 
-    function drawKeyboard(ctx, s, a) {
-        applyStyle(ctx, a, s*0.08);
-        const W = s*3.0, H = s*1.1, r = s*0.1;
+    // 6. SSD
+    function drawSSD(ctx, s, a) {
+        applyStyle(ctx, a, s*0.09);
+        const W = s*2.4, H = s*1.6, r = s*0.14;
+        // Outer casing
         ctx.beginPath(); ctx.roundRect(-W/2,-H/2,W,H,r); ctx.stroke();
-        const cols = 8, rows = 3, kW = (W*0.88)/cols, kH = (H*0.7)/rows;
-        const sx = -W/2+W*0.06, sy = -H/2+H*0.12;
+        // Label area
+        ctx.beginPath(); ctx.roundRect(-W/2+s*0.18,-H/2+s*0.15,W-s*0.36,H*0.45,s*0.06); ctx.stroke();
+        // SSD text line
         ctx.lineWidth = s*0.06;
-        for (let r2 = 0; r2 < rows; r2++) {
-            for (let c = 0; c < cols; c++) {
-                ctx.beginPath(); ctx.roundRect(sx+c*kW, sy+r2*kH, kW*0.78, kH*0.75, s*0.04); ctx.stroke();
-            }
+        ctx.beginPath(); ctx.moveTo(-s*0.4,-H/2+s*0.32); ctx.lineTo(s*0.4,-H/2+s*0.32); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(-s*0.25,-H/2+s*0.48); ctx.lineTo(s*0.25,-H/2+s*0.48); ctx.stroke();
+        // Connector pins at bottom
+        ctx.lineWidth = s*0.09;
+        const pins = 6, pinGap = (W*0.7)/(pins-1);
+        for (let i = 0; i < pins; i++) {
+            const px = -W*0.35 + i*pinGap;
+            ctx.beginPath(); ctx.moveTo(px,H/2-s*0.08); ctx.lineTo(px,H/2+s*0.15); ctx.stroke();
         }
+        // Corner screw holes
+        const sc = s*0.1;
+        [[-W/2+s*0.2,-H/2+s*0.2],[W/2-s*0.2,-H/2+s*0.2],[-W/2+s*0.2,H/2-s*0.2],[W/2-s*0.2,H/2-s*0.2]].forEach(([cx,cy])=>{
+            ctx.beginPath(); ctx.arc(cx,cy,sc,0,Math.PI*2); ctx.stroke();
+        });
     }
 
-    function drawMouse(ctx, s, a) {
+    // 7. GPU
+    function drawGPU(ctx, s, a) {
         applyStyle(ctx, a, s*0.09);
-        const W = s*1.2, H = s*1.8;
-        ctx.beginPath(); ctx.ellipse(0,s*0.15,W/2,H/2,0,0,Math.PI*2); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(0,-H/2+s*0.1); ctx.lineTo(0,0); ctx.stroke();
-        ctx.beginPath(); ctx.roundRect(-s*0.18,-s*0.28,s*0.36,s*0.5,s*0.08); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(-W/2+s*0.05,-s*0.1); ctx.quadraticCurveTo(0,s*0.05,W/2-s*0.05,-s*0.1); ctx.stroke();
-    }
-
-    function drawHeadphones(ctx, s, a) {
-        applyStyle(ctx, a, s*0.1);
-        const r = s*1.0;
-        ctx.beginPath(); ctx.arc(0,0,r,Math.PI,0); ctx.stroke();
-        ctx.beginPath(); ctx.ellipse(-r,s*0.1,s*0.32,s*0.5,0,0,Math.PI*2); ctx.stroke();
-        ctx.beginPath(); ctx.ellipse( r,s*0.1,s*0.32,s*0.5,0,0,Math.PI*2); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(-r,-s*0.05); ctx.lineTo(-r,-r*0.92); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo( r,-s*0.05); ctx.lineTo( r,-r*0.92); ctx.stroke();
-    }
-
-    function drawWifi(ctx, s, a) {
-        applyStyle(ctx, a, s*0.1);
-        for (let i = 3; i >= 1; i--) {
-            ctx.beginPath(); ctx.arc(0,s*0.6,s*0.45*i,Math.PI*1.2,Math.PI*1.8); ctx.stroke();
-        }
-        ctx.beginPath(); ctx.arc(0,s*0.6,s*0.12,0,Math.PI*2); ctx.fill();
-    }
-
-    function drawGear(ctx, s, a) {
-        applyStyle(ctx, a, s*0.09);
-        const teeth = 8, outerR = s*1.0, innerR = s*0.68, toothH = s*0.28;
-        ctx.beginPath();
-        for (let i = 0; i < teeth; i++) {
-            const ang  = (i/teeth)*Math.PI*2;
-            const next = ((i+1)/teeth)*Math.PI*2;
-            const half = (next-ang)*0.3;
-            ctx.lineTo(Math.cos(ang-half)*innerR,         Math.sin(ang-half)*innerR);
-            ctx.lineTo(Math.cos(ang-half)*(outerR+toothH),Math.sin(ang-half)*(outerR+toothH));
-            ctx.lineTo(Math.cos(ang+half)*(outerR+toothH),Math.sin(ang+half)*(outerR+toothH));
-            ctx.lineTo(Math.cos(ang+half)*innerR,         Math.sin(ang+half)*innerR);
-        }
-        ctx.closePath(); ctx.stroke();
-        ctx.beginPath(); ctx.arc(0,0,s*0.35,0,Math.PI*2); ctx.stroke();
-    }
-
-    function drawHDD(ctx, s, a) {
-        applyStyle(ctx, a, s*0.09);
-        const W = s*2.2, H = s*1.5, r = s*0.25;
+        const W = s*2.8, H = s*1.8, r = s*0.12;
+        // PCB board
         ctx.beginPath(); ctx.roundRect(-W/2,-H/2,W,H,r); ctx.stroke();
-        ctx.beginPath(); ctx.arc(-s*0.15,0,s*0.52,0,Math.PI*2); ctx.stroke();
-        ctx.beginPath(); ctx.arc(-s*0.15,0,s*0.18,0,Math.PI*2); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(-s*0.15+s*0.18,0); ctx.lineTo(s*0.85,-s*0.25); ctx.stroke();
-        ctx.beginPath(); ctx.arc(s*0.85,-s*0.25,s*0.12,0,Math.PI*2); ctx.fill();
+        // Big fan (circle)
+        ctx.beginPath(); ctx.arc(-s*0.3,0,s*0.6,0,Math.PI*2); ctx.stroke();
+        // Fan blades (cross)
+        ctx.lineWidth = s*0.06;
+        const fanR = s*0.45;
+        for (let i = 0; i < 6; i++) {
+            const ang = (i/6)*Math.PI*2;
+            ctx.beginPath();
+            ctx.moveTo(-s*0.3+Math.cos(ang)*s*0.12, Math.sin(ang)*s*0.12);
+            ctx.lineTo(-s*0.3+Math.cos(ang)*fanR, Math.sin(ang)*fanR);
+            ctx.stroke();
+        }
+        // Fan center
+        ctx.lineWidth = s*0.09;
+        ctx.beginPath(); ctx.arc(-s*0.3,0,s*0.15,0,Math.PI*2); ctx.stroke();
+        // Heatsink fins on right side
+        ctx.lineWidth = s*0.05;
+        for (let i = 0; i < 5; i++) {
+            const fy = -H*0.35 + i*(H*0.7)/4;
+            ctx.beginPath(); ctx.moveTo(s*0.45,fy); ctx.lineTo(W/2-s*0.12,fy); ctx.stroke();
+        }
+        // Display ports at bottom
+        ctx.lineWidth = s*0.09;
+        for (let i = 0; i < 3; i++) {
+            ctx.beginPath(); ctx.roundRect(-W*0.35+i*s*0.6,H/2-s*0.04,s*0.4,s*0.2,s*0.04); ctx.stroke();
+        }
+    }
+
+    // 8. Cloud
+    function drawCloud(ctx, s, a) {
+        applyStyle(ctx, a, s*0.1);
+        // Main cloud shape using overlapping circles
+        ctx.beginPath();
+        ctx.arc(-s*0.55, s*0.1, s*0.55, Math.PI*0.6, Math.PI*1.9); // left
+        ctx.arc(0, -s*0.35, s*0.65, Math.PI*1.1, Math.PI*0.0);     // top
+        ctx.arc(s*0.6, s*0.05, s*0.5, Math.PI*1.4, Math.PI*0.5);   // right
+        ctx.lineTo(-s*0.55+s*0.55*Math.cos(Math.PI*0.6), s*0.1+s*0.55*Math.sin(Math.PI*0.6));
+        ctx.stroke();
+        // Upload arrow inside
+        ctx.lineWidth = s*0.08;
+        ctx.beginPath(); ctx.moveTo(0,s*0.35); ctx.lineTo(0,-s*0.05); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(-s*0.22,s*0.12); ctx.lineTo(0,-s*0.1); ctx.lineTo(s*0.22,s*0.12); ctx.stroke();
+    }
+
+    // 9. AI (Brain)
+    function drawAI(ctx, s, a) {
+        applyStyle(ctx, a, s*0.09);
+        const r = s*0.9;
+        // Brain outline — left hemisphere
+        ctx.beginPath();
+        ctx.arc(-s*0.15, -s*0.1, r*0.6, Math.PI*0.5, Math.PI*1.5);
+        ctx.stroke();
+        // Brain outline — right hemisphere
+        ctx.beginPath();
+        ctx.arc(s*0.15, -s*0.1, r*0.6, Math.PI*1.5, Math.PI*0.5);
+        ctx.stroke();
+        // Center divide
+        ctx.beginPath(); ctx.moveTo(0,-r*0.6-s*0.1); ctx.lineTo(0,r*0.5-s*0.1); ctx.stroke();
+        // Neural connection dots
+        ctx.lineWidth = s*0.06;
+        const nodes = [
+            {x:-s*0.35, y:-s*0.3}, {x:-s*0.3, y:s*0.15},
+            {x:s*0.35, y:-s*0.3},  {x:s*0.3, y:s*0.15},
+            {x:0, y:-s*0.5},       {x:0, y:s*0.25}
+        ];
+        // Connection lines
+        ctx.beginPath(); ctx.moveTo(nodes[0].x,nodes[0].y); ctx.lineTo(nodes[4].x,nodes[4].y); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(nodes[2].x,nodes[2].y); ctx.lineTo(nodes[4].x,nodes[4].y); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(nodes[0].x,nodes[0].y); ctx.lineTo(nodes[1].x,nodes[1].y); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(nodes[2].x,nodes[2].y); ctx.lineTo(nodes[3].x,nodes[3].y); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(nodes[1].x,nodes[1].y); ctx.lineTo(nodes[5].x,nodes[5].y); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(nodes[3].x,nodes[3].y); ctx.lineTo(nodes[5].x,nodes[5].y); ctx.stroke();
+        // Dots
+        nodes.forEach(n => {
+            ctx.beginPath(); ctx.arc(n.x,n.y,s*0.08,0,Math.PI*2); ctx.fill();
+        });
+        // "AI" label below
+        ctx.lineWidth = s*0.07;
+        // A
+        ctx.beginPath(); ctx.moveTo(-s*0.28,s*0.75); ctx.lineTo(-s*0.15,s*0.5); ctx.lineTo(-s*0.02,s*0.75); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(-s*0.24,s*0.65); ctx.lineTo(-s*0.06,s*0.65); ctx.stroke();
+        // I
+        ctx.beginPath(); ctx.moveTo(s*0.12,s*0.5); ctx.lineTo(s*0.12,s*0.75); ctx.stroke();
+    }
+
+    // 10. Robot
+    function drawRobot(ctx, s, a) {
+        applyStyle(ctx, a, s*0.09);
+        // Head
+        const hW = s*1.4, hH = s*1.0;
+        ctx.beginPath(); ctx.roundRect(-hW/2,-s*0.9,hW,hH,s*0.18); ctx.stroke();
+        // Eyes
+        ctx.beginPath(); ctx.arc(-s*0.32,-s*0.45,s*0.18,0,Math.PI*2); ctx.stroke();
+        ctx.beginPath(); ctx.arc( s*0.32,-s*0.45,s*0.18,0,Math.PI*2); ctx.stroke();
+        // Eye pupils
+        ctx.beginPath(); ctx.arc(-s*0.32,-s*0.45,s*0.07,0,Math.PI*2); ctx.fill();
+        ctx.beginPath(); ctx.arc( s*0.32,-s*0.45,s*0.07,0,Math.PI*2); ctx.fill();
+        // Mouth
+        ctx.beginPath(); ctx.roundRect(-s*0.35,-s*0.15,s*0.7,s*0.18,s*0.06); ctx.stroke();
+        // Mouth lines
+        ctx.lineWidth = s*0.05;
         for (let i = 0; i < 4; i++) {
-            ctx.beginPath(); ctx.roundRect(W/2-s*0.18,-H*0.3+i*s*0.22,s*0.16,s*0.14,s*0.03); ctx.stroke();
+            const mx = -s*0.2 + i*s*0.13;
+            ctx.beginPath(); ctx.moveTo(mx,-s*0.14); ctx.lineTo(mx,-s*0.0); ctx.stroke();
         }
+        // Antenna
+        ctx.lineWidth = s*0.09;
+        ctx.beginPath(); ctx.moveTo(0,-s*0.9); ctx.lineTo(0,-s*1.25); ctx.stroke();
+        ctx.beginPath(); ctx.arc(0,-s*1.3,s*0.1,0,Math.PI*2); ctx.fill();
+        // Body
+        const bW = s*1.6, bH = s*0.9;
+        ctx.beginPath(); ctx.roundRect(-bW/2,s*0.15,bW,bH,s*0.12); ctx.stroke();
+        // Body panel lines
+        ctx.lineWidth = s*0.05;
+        ctx.beginPath(); ctx.moveTo(-s*0.5,s*0.45); ctx.lineTo(s*0.5,s*0.45); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(-s*0.5,s*0.7); ctx.lineTo(s*0.5,s*0.7); ctx.stroke();
+        // Arms
+        ctx.lineWidth = s*0.09;
+        ctx.beginPath(); ctx.moveTo(-bW/2,s*0.4); ctx.lineTo(-bW/2-s*0.35,s*0.55); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo( bW/2,s*0.4); ctx.lineTo( bW/2+s*0.35,s*0.55); ctx.stroke();
     }
 
-    function drawBattery(ctx, s, a) {
-        applyStyle(ctx, a, s*0.09);
-        const W = s*2.2, H = s*1.0, r = s*0.12;
-        ctx.beginPath(); ctx.roundRect(-W/2,-H/2,W,H,r); ctx.stroke();
-        ctx.beginPath(); ctx.roundRect(W/2,-H*0.25,s*0.22,H*0.5,s*0.06); ctx.stroke();
-        const bars = 3, barW = (W*0.72)/bars - s*0.1;
-        for (let i = 0; i < bars; i++) {
-            ctx.beginPath(); ctx.roundRect(-W*0.38+i*(barW+s*0.1),-H*0.28,barW,H*0.56,s*0.05); ctx.fill();
-        }
-    }
-
-    function drawPower(ctx, s, a) {
-        applyStyle(ctx, a, s*0.11);
-        const r = s*1.0;
-        ctx.beginPath(); ctx.arc(0,0,r,Math.PI*0.2,Math.PI*0.8,false); ctx.stroke();
-        ctx.beginPath(); ctx.arc(0,0,r,Math.PI*1.2,Math.PI*1.8,false); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(0,-r); ctx.lineTo(0,-r*0.3); ctx.stroke();
-    }
-
-    function drawUSB(ctx, s, a) {
-        applyStyle(ctx, a, s*0.1);
-        ctx.beginPath(); ctx.moveTo(0,s*0.9); ctx.lineTo(0,-s*0.3); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(0,s*0.0); ctx.lineTo(-s*0.65,-s*0.6); ctx.stroke();
-        ctx.beginPath(); ctx.rect(-s*0.65-s*0.18,-s*0.6-s*0.14,s*0.36,s*0.28); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(0,-s*0.1); ctx.lineTo(s*0.55,-s*0.65); ctx.stroke();
-        ctx.beginPath(); ctx.arc(s*0.55,-s*0.65-s*0.14,s*0.16,0,Math.PI*2); ctx.stroke();
-        ctx.beginPath(); ctx.arc(0,s*0.9,s*0.16,0,Math.PI*2); ctx.fill();
-    }
-
-    function drawServer(ctx, s, a) {
-        applyStyle(ctx, a, s*0.09);
-        const W = s*2.2, unitH = s*0.5, units = 4, r = s*0.07;
-        for (let i = 0; i < units; i++) {
-            const y = -units*unitH/2+i*unitH;
-            ctx.beginPath(); ctx.roundRect(-W/2,y+s*0.04,W,unitH-s*0.08,r); ctx.stroke();
-            ctx.beginPath(); ctx.arc(W/2-s*0.2,y+unitH/2,s*0.07,0,Math.PI*2); ctx.fill();
-            for (let d = 0; d < 3; d++) {
-                ctx.beginPath(); ctx.roundRect(-W/2+s*0.15+d*s*0.42,y+s*0.14,s*0.3,unitH*0.55,s*0.03); ctx.stroke();
-            }
-        }
-    }
-
-    function drawLaptop(ctx, s, a) {
-        applyStyle(ctx, a, s*0.09);
-        const W = s*2.4, H = s*1.5, r = s*0.1, pad = s*0.18;
-        ctx.beginPath(); ctx.roundRect(-W/2,-H,W,H*0.7,r); ctx.stroke();
-        ctx.beginPath(); ctx.roundRect(-W/2+pad,-H+pad,W-pad*2,H*0.7-pad*2,s*0.05); ctx.stroke();
-        ctx.beginPath(); ctx.roundRect(-W/2-s*0.15,-H*0.3,W+s*0.3,H*0.3,r); ctx.stroke();
-        ctx.lineWidth = s*0.06;
-        for (let row = 0; row < 2; row++) {
-            ctx.beginPath(); ctx.moveTo(-W/2+s*0.35,-H*0.18+row*s*0.28); ctx.lineTo(W/2-s*0.35,-H*0.18+row*s*0.28); ctx.stroke();
-        }
-    }
-
-    function drawCircuit(ctx, s, a, segments) {
-        applyStyle(ctx, a, s*0.1);
-        let cx = -s, cy = 0;
-        ctx.beginPath(); ctx.moveTo(cx,cy);
-        if (segments) {
-            for (let i = 0; i < segments.length; i++) {
-                const seg = segments[i];
-                if (i%2===0) cx += seg * s;
-                else         cy += seg * s;
-                ctx.lineTo(cx,cy);
-            }
-        }
-        ctx.stroke();
-        ctx.beginPath(); ctx.arc(-s,0,s*0.13,0,Math.PI*2); ctx.fill();
-        ctx.beginPath(); ctx.arc(cx,cy,s*0.13,0,Math.PI*2); ctx.fill();
-    }
-
-    function drawSine(ctx, s, a) {
-        applyStyle(ctx, a, s*0.1);
-        const W = s*3.0, amp = s*0.55;
-        ctx.beginPath(); ctx.roundRect(-W/2,-amp-s*0.2,W,amp*2+s*0.4,s*0.1); ctx.stroke();
-        ctx.beginPath();
-        for (let t = 0; t <= 1; t += 0.02) {
-            const x = -W/2+s*0.2+t*(W-s*0.4), y = -amp*Math.sin(t*Math.PI*4);
-            t===0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
-        }
-        ctx.stroke();
-    }
-
-    function drawController(ctx, s, a) {
-        applyStyle(ctx, a, s*0.09);
-        const W = s*2.4, H = s*1.5;
-        ctx.beginPath();
-        ctx.moveTo(-W*0.18,-H/2); ctx.lineTo(W*0.18,-H/2);
-        ctx.quadraticCurveTo(W/2,-H/2,W/2,0);
-        ctx.quadraticCurveTo(W/2,H/2,W*0.25,H/2);
-        ctx.lineTo(W*0.08,H*0.25); ctx.lineTo(-W*0.08,H*0.25);
-        ctx.lineTo(-W*0.25,H/2);
-        ctx.quadraticCurveTo(-W/2,H/2,-W/2,0);
-        ctx.quadraticCurveTo(-W/2,-H/2,-W*0.18,-H/2);
-        ctx.stroke();
-        ctx.lineWidth = s*0.07;
-        const dpX=-W*0.3, dpY=s*0.05, ds=s*0.22;
-        ctx.beginPath(); ctx.moveTo(dpX,dpY-ds); ctx.lineTo(dpX,dpY+ds); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(dpX-ds,dpY); ctx.lineTo(dpX+ds,dpY); ctx.stroke();
-        [{x:W*0.32,y:-s*0.18},{x:W*0.2,y:s*0.05},{x:W*0.44,y:s*0.05},{x:W*0.32,y:s*0.28}].forEach(b=>{
-            ctx.beginPath(); ctx.arc(b.x,b.y,s*0.11,0,Math.PI*2); ctx.stroke();
-        });
-    }
-
-    function drawBulb(ctx, s, a) {
-        applyStyle(ctx, a, s*0.09);
-        const r = s*0.85;
-        ctx.beginPath();
-        ctx.arc(0,-s*0.2,r,Math.PI*0.15,Math.PI*0.85,true);
-        ctx.lineTo(-r*0.55,s*0.45);
-        ctx.quadraticCurveTo(-r*0.55,s*0.7,0,s*0.75);
-        ctx.quadraticCurveTo(r*0.55,s*0.7,r*0.55,s*0.45);
-        ctx.closePath(); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(-s*0.45,s*0.78); ctx.lineTo(s*0.45,s*0.78); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(-s*0.38,s*0.95); ctx.lineTo(s*0.38,s*0.95); ctx.stroke();
-        ctx.lineWidth = s*0.07;
-        ctx.beginPath();
-        ctx.moveTo(-s*0.28,s*0.2); ctx.lineTo(-s*0.1,s*0.05);
-        ctx.lineTo(s*0.1,s*0.2);   ctx.lineTo(s*0.28,s*0.05);
-        ctx.stroke();
-    }
-
-    function drawNetwork(ctx, s, a) {
-        applyStyle(ctx, a, s*0.09);
-        const nodes = [{x:0,y:-s},{x:-s,y:s*0.3},{x:s,y:s*0.3},{x:-s*0.4,y:s*1.1},{x:s*0.4,y:s*1.1}];
-        [[0,1],[0,2],[1,2],[1,3],[2,4],[3,4]].forEach(([i,j])=>{
-            ctx.beginPath(); ctx.moveTo(nodes[i].x,nodes[i].y); ctx.lineTo(nodes[j].x,nodes[j].y); ctx.stroke();
-        });
-        nodes.forEach(n=>{
-            ctx.beginPath(); ctx.arc(n.x,n.y,s*0.18,0,Math.PI*2); ctx.stroke();
-        });
-    }
-
-    function drawMotherboard(ctx, s, a) {
-        applyStyle(ctx, a, s*0.09);
-        const W = s*2.8, H = s*2.4, r = s*0.15;
-        ctx.beginPath(); ctx.roundRect(-W/2,-H/2,W,H,r); ctx.stroke();
-        const sq = s*0.8;
-        ctx.beginPath(); ctx.roundRect(-sq/2,-H*0.2,sq,sq,s*0.08); ctx.stroke();
-        for (let i = 0; i < 2; i++) {
-            ctx.beginPath(); ctx.roundRect(W*0.25+i*s*0.35,-H*0.35,s*0.22,H*0.55,s*0.04); ctx.stroke();
-        }
-        ctx.beginPath(); ctx.roundRect(-W*0.42,H*0.2,W*0.65,s*0.24,s*0.04); ctx.stroke();
-        [[-W*0.38,-H*0.32],[W*0.38,H*0.1],[-W*0.15,H*0.35]].forEach(([cx,cy])=>{
-            ctx.beginPath(); ctx.arc(cx,cy,s*0.14,0,Math.PI*2); ctx.stroke();
-        });
-    }
-
-    function drawMagnifier(ctx, s, a) {
-        applyStyle(ctx, a, s*0.11);
-        ctx.beginPath(); ctx.arc(0,-s*0.2,s*0.72,0,Math.PI*2); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(s*0.72*0.72,-s*0.2+s*0.72*0.72); ctx.lineTo(s*1.2,s*1.1); ctx.stroke();
-    }
-
-    function drawSD(ctx, s, a) {
-        applyStyle(ctx, a, s*0.09);
-        const W = s*1.4, H = s*1.8, cut = s*0.35, r = s*0.1;
-        ctx.beginPath();
-        ctx.moveTo(-W/2+cut,-H/2); ctx.lineTo(W/2-r,-H/2); ctx.arcTo(W/2,-H/2,W/2,-H/2+r,r);
-        ctx.lineTo(W/2,H/2-r); ctx.arcTo(W/2,H/2,W/2-r,H/2,r);
-        ctx.lineTo(-W/2+r,H/2); ctx.arcTo(-W/2,H/2,-W/2,H/2-r,r);
-        ctx.lineTo(-W/2,-H/2+cut); ctx.closePath(); ctx.stroke();
-        const pins=4, pinW=(W*0.7)/pins;
-        for (let i=0;i<pins;i++) {
-            ctx.beginPath(); ctx.moveTo(-W*0.32+i*pinW,H/2-s*0.08); ctx.lineTo(-W*0.32+i*pinW,H/2-s*0.5); ctx.stroke();
-        }
-    }
-
-    // ── all drawers ──────────────────────────────────────────────
+    // ── fixed icon list (exactly 10, in order) ──────────────────
     const DRAWERS = [
-        drawMonitor, drawCPU, drawRAM, drawKeyboard, drawMouse,
-        drawHeadphones, drawWifi, drawGear, drawHDD, drawBattery,
-        drawPower, drawUSB, drawServer, drawLaptop, drawCircuit,
-        drawSine, drawController, drawBulb, drawNetwork,
-        drawMotherboard, drawMagnifier, drawSD,
+        drawMonitor,    // PC
+        drawCPU,        // Processor
+        drawHeadphones, // Headphones
+        drawCamera,     // Camera
+        drawRAM,        // RAM
+        drawSSD,        // SSD
+        drawGPU,        // GPU
+        drawCloud,      // Cloud
+        drawAI,         // AI
+        drawRobot,      // Robot
     ];
 
-    // ── layout: place doodles only in the side gutters ───────────
+    // ── layout: deterministic placement in side gutters ───────────
     let W, H, particles = [];
 
     function buildParticles() {
         particles = [];
+        rng = seededRandom(SEED); // reset seed — same positions every time
 
         // Content column bounds (matches CSS max-width: 860px centred)
-        const CONTENT_W   = 900;           // a little wider than 860 for safety
+        const CONTENT_W    = 900;
         const contentLeft  = Math.max(0, (W - CONTENT_W) / 2);
         const contentRight = Math.min(W,  (W + CONTENT_W) / 2);
-        const gutterL = contentLeft;        // width of left gutter
-        const gutterR = W - contentRight;   // width of right gutter
+        const gutterL = contentLeft;
+        const gutterR = W - contentRight;
 
-        const MIN_GUTTER = 100;            // don't draw if gutter too thin
+        const MIN_GUTTER = 100;
 
-        // Determine doodle size based on available space
         const maxSize = Math.min(34, Math.max(18, Math.min(gutterL, gutterR) * 0.30));
         const minSize = maxSize * 0.55;
 
+        let iconIdx = 0;
+
         // --- LEFT GUTTER ---
         if (gutterL >= MIN_GUTTER) {
-            // How many rows fit?
             const rows = Math.floor(H / (maxSize * 3.8));
             for (let row = 0; row < rows; row++) {
-                const size  = minSize + Math.random() * (maxSize - minSize);
-                const pad   = size * 1.8;
-                const xMax  = gutterL - pad;
+                const size = minSize + rng() * (maxSize - minSize);
+                const pad  = size * 1.8;
+                const xMax = gutterL - pad;
                 if (xMax < pad) continue;
-                const x = pad + Math.random() * (xMax - pad);
-                const y = (row / rows) * H + (Math.random() * (H / rows));
-                particles.push(makeParticle(x, y, size));
+                const x = pad + rng() * (xMax - pad);
+                const y = (row / rows) * H + (rng() * (H / rows));
+                particles.push(makeParticle(x, y, size, iconIdx));
+                iconIdx = (iconIdx + 1) % DRAWERS.length;
             }
         }
 
@@ -496,58 +461,41 @@ function initDoodles() {
         if (gutterR >= MIN_GUTTER) {
             const rows = Math.floor(H / (maxSize * 3.8));
             for (let row = 0; row < rows; row++) {
-                const size  = minSize + Math.random() * (maxSize - minSize);
-                const pad   = size * 1.8;
-                const xMin  = contentRight + pad;
-                const xMax  = W - pad;
+                const size = minSize + rng() * (maxSize - minSize);
+                const pad  = size * 1.8;
+                const xMin = contentRight + pad;
+                const xMax = W - pad;
                 if (xMin >= xMax) continue;
-                const x = xMin + Math.random() * (xMax - xMin);
-                const y = (row / rows) * H + (Math.random() * (H / rows));
-                particles.push(makeParticle(x, y, size));
+                const x = xMin + rng() * (xMax - xMin);
+                const y = (row / rows) * H + (rng() * (H / rows));
+                particles.push(makeParticle(x, y, size, iconIdx));
+                iconIdx = (iconIdx + 1) % DRAWERS.length;
             }
         }
 
-        // --- Narrow screens: sprinkle a few tiny ones top & bottom ---
+        // --- Narrow screens: a few tiny doodles top & bottom ---
         if (gutterL < MIN_GUTTER && gutterR < MIN_GUTTER) {
             const count = 6;
             for (let i = 0; i < count; i++) {
-                const size = 14 + Math.random() * 10;
-                const side = Math.random() < 0.5 ? -1 : 1;
-                const x = W/2 + side * (Math.random() * W * 0.42 + W * 0.06);
-                const top = Math.random() < 0.5;
-                const y = top ? size * 2 + Math.random() * 60 : H - size * 2 - Math.random() * 60;
-                particles.push(makeParticle(x, y, size));
+                const size = 14 + rng() * 10;
+                const side = rng() < 0.5 ? -1 : 1;
+                const x = W/2 + side * (rng() * W * 0.42 + W * 0.06);
+                const top = rng() < 0.5;
+                const y = top ? size * 2 + rng() * 60 : H - size * 2 - rng() * 60;
+                particles.push(makeParticle(x, y, size, iconIdx));
+                iconIdx = (iconIdx + 1) % DRAWERS.length;
             }
         }
     }
 
-    function makeParticle(x, y, size) {
-        const drawFn = DRAWERS[Math.floor(Math.random() * DRAWERS.length)];
-        let circuitSegments = null;
-        if (drawFn === drawCircuit) {
-            const segs = 3 + Math.floor(Math.random() * 3);
-            circuitSegments = [];
-            for (let i = 0; i < segs; i++) {
-                const len = 0.5 + Math.random() * 1.2;
-                circuitSegments.push((Math.random() < 0.5 ? 1 : -1) * len);
-            }
-        }
+    function makeParticle(x, y, size, iconIndex) {
         return {
-            draw:  drawFn,
+            draw:  DRAWERS[iconIndex],
             x, y, size,
-            alpha: 0.15 + Math.random() * 0.15,
-            rot:   (Math.random() - 0.5) * 0.55,
-            phase: Math.random() * Math.PI * 2,
-            circuitSegments,
+            alpha: 0.15 + rng() * 0.15,
+            rot:   (rng() - 0.5) * 0.55,
+            phase: rng() * Math.PI * 2,
         };
-    }
-
-    function resize() {
-        W = window.innerWidth;
-        H = window.innerHeight;
-        canvas.width  = W;
-        canvas.height = H;
-        buildParticles();
     }
 
     // ── animation: opacity breathe only, NO position changes ─────
@@ -556,12 +504,11 @@ function initDoodles() {
         ctx.clearRect(0, 0, W, H);
         frame++;
         for (const p of particles) {
-            // very slow, gentle opacity pulse ±15 %
             const breathe = 0.85 + 0.15 * Math.sin(frame * 0.008 + p.phase);
             ctx.save();
             ctx.translate(p.x, p.y);
             ctx.rotate(p.rot);
-            p.draw(ctx, p.size, p.alpha * breathe, p.circuitSegments);
+            p.draw(ctx, p.size, p.alpha * breathe);
             ctx.restore();
         }
         requestAnimationFrame(tick);
