@@ -1,29 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Racing | Taufiq Mustafizur Rahman</title>
     <meta name="description" content="Racing and motorsports passion of Taufiq Mustafizur Rahman — Formula 1 enthusiast.">
+    <script>(function(){var t=localStorage.getItem('tmr-theme')||'light';document.documentElement.setAttribute('data-theme',t);document.documentElement.classList.add('no-transition');window.addEventListener('DOMContentLoaded',function(){setTimeout(function(){document.documentElement.classList.remove('no-transition');},50);});}());</script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <div class="portfolio-bg">
-        <div class="orb orb-1"></div>
-        <div class="orb orb-2"></div>
-        <div class="orb orb-3"></div>
-    </div>
-    <div class="particles-container" id="particles"></div>
-    <div class="cursor-glow" id="cursorGlow"></div>
-    <div class="subpage-bg" style="background-image: url('https://media.formula1.com/image/upload/t_16by9South/c_lfill,w_2048/q_auto/v1740000001/fom-website/campaign/projects/beginner%27s%20guides/GettyImages-2234147338.webp');"></div>
+    <div class="page-border page-border-top"></div>
+    <div class="page-border page-border-bottom"></div>
+    <div class="page-border page-border-left"></div>
+    <div class="page-border page-border-right"></div>
+
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+        <i class="fa-solid fa-moon"></i>
+    </button>
 
     <nav class="navbar">
         <div class="nav-container">
-            <a href="index.html" class="logo">TMR</a>
+            <a href="index.html" class="logo">TMR.</a>
             <ul class="nav-links">
                 <li><a href="about.html">About</a></li>
                 <li><a href="projects.html">Projects</a></li>
@@ -34,14 +37,25 @@
         </div>
     </nav>
 
-    <div class="subpage-content">
-        <div class="subpage-card">
-            <h1>🏎️ Racing</h1>
-            <p>Following motorsports and the engineering behind speed. The adrenaline, the strategy, the machines — nothing beats the thrill of racing.</p>
-            <a href="https://www.formula1.com/en" class="btn-primary glow-btn" target="_blank" id="racingF1Btn" style="background: linear-gradient(135deg, #c0392b, #e74c3c); box-shadow: 0 4px 20px rgba(192,57,43,0.4);"><i class="fa-solid fa-flag-checkered"></i> Formula 1 Official</a>
+    <div class="subpage-wrap">
+        <div class="subpage-header fade-in">
+            <p class="subpage-pretitle">// hobbies</p>
+            <h1 class="subpage-title">🏎️ Racing</h1>
         </div>
-        <a href="hobbies.html" class="btn-secondary">← Back to Hobbies</a>
+        <p class="subpage-body fade-in">
+            Following motorsports and the engineering wizardry behind speed. The adrenaline, the strategy, the machines — nothing beats the thrill of watching a perfectly executed overtake or a nail-biting season finale. Formula 1 is where technology meets sport at its absolute peak.
+        </p>
+        <div class="subpage-actions fade-in">
+            <a href="https://www.formula1.com/en" class="btn-primary" target="_blank" id="racingF1Btn">
+                <i class="fa-solid fa-flag-checkered"></i> Formula 1 Official
+            </a>
+            <a href="hobbies.html" class="btn-secondary">← Back to Hobbies</a>
+        </div>
     </div>
+
+    <footer>
+        <p>© <span id="year"></span> Taufiq Mustafizur Rahman</p>
+    </footer>
 
     <script src="script.js"></script>
 </body>
