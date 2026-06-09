@@ -1,29 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gaming | Taufiq Mustafizur Rahman</title>
     <meta name="description" content="Gaming interests of Taufiq Mustafizur Rahman — interactive worlds and competitive play.">
+    <script>(function(){var t=localStorage.getItem('tmr-theme')||'light';document.documentElement.setAttribute('data-theme',t);document.documentElement.classList.add('no-transition');window.addEventListener('DOMContentLoaded',function(){setTimeout(function(){document.documentElement.classList.remove('no-transition');},50);});}());</script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <div class="portfolio-bg">
-        <div class="orb orb-1"></div>
-        <div class="orb orb-2"></div>
-        <div class="orb orb-3"></div>
-    </div>
-    <div class="particles-container" id="particles"></div>
-    <div class="cursor-glow" id="cursorGlow"></div>
-    <div class="subpage-bg" style="background-image: url('https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2000&auto=format&fit=crop');"></div>
+    <div class="page-border page-border-top"></div>
+    <div class="page-border page-border-bottom"></div>
+    <div class="page-border page-border-left"></div>
+    <div class="page-border page-border-right"></div>
+
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+        <i class="fa-solid fa-moon"></i>
+    </button>
 
     <nav class="navbar">
         <div class="nav-container">
-            <a href="index.html" class="logo">TMR</a>
+            <a href="index.html" class="logo">TMR.</a>
             <ul class="nav-links">
                 <li><a href="about.html">About</a></li>
                 <li><a href="projects.html">Projects</a></li>
@@ -34,13 +37,22 @@
         </div>
     </nav>
 
-    <div class="subpage-content">
-        <div class="subpage-card">
-            <h1>🎮 Gaming</h1>
-            <p>Experiencing interactive worlds and competitive play. From indie gems to triple-A titles, gaming is an art form that pushes storytelling and technology to the limit.</p>
+    <div class="subpage-wrap">
+        <div class="subpage-header fade-in">
+            <p class="subpage-pretitle">// hobbies</p>
+            <h1 class="subpage-title">🎮 Gaming</h1>
         </div>
-        <a href="hobbies.html" class="btn-secondary">← Back to Hobbies</a>
+        <p class="subpage-body fade-in">
+            Experiencing interactive worlds and the thrill of competitive play. From indie gems with deeply personal narratives to massive triple-A titles that push the boundaries of what technology can create — gaming is a medium that deserves to be taken seriously as art.
+        </p>
+        <div class="subpage-actions fade-in">
+            <a href="hobbies.html" class="btn-secondary">← Back to Hobbies</a>
+        </div>
     </div>
+
+    <footer>
+        <p>© <span id="year"></span> Taufiq Mustafizur Rahman</p>
+    </footer>
 
     <script src="script.js"></script>
 </body>
