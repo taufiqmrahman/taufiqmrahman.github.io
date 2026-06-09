@@ -1,38 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Taufiq Mustafizur Rahman </title>
-    <meta name="description"
-        content="Portfolio of Taufiq Mustafizur Rahman — Computer Science & Engineering student at Brac University.">
+    <title>Taufiq Mustafizur Rahman</title>
+    <meta name="description" content="Taufiq Mustafizur Rahman — Computer Science & Engineering student at Brac University.">
+    <!-- Prevent dark/light mode flash -->
+    <script>
+        (function(){var t=localStorage.getItem('tmr-theme')||'light';document.documentElement.setAttribute('data-theme',t);document.documentElement.classList.add('no-transition');window.addEventListener('DOMContentLoaded',function(){setTimeout(function(){document.documentElement.classList.remove('no-transition');},50);});}());
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <!-- Animated Background -->
-    <div class="portfolio-bg">
-        <div class="orb orb-1"></div>
-        <div class="orb orb-2"></div>
-        <div class="orb orb-3"></div>
-    </div>
+    <!-- Page border frame (gkoberger-inspired) -->
+    <div class="page-border page-border-top"></div>
+    <div class="page-border page-border-bottom"></div>
+    <div class="page-border page-border-left"></div>
+    <div class="page-border page-border-right"></div>
 
-    <!-- Floating Particles -->
-    <div class="particles-container" id="particles"></div>
-
-    <!-- Cursor Glow -->
-    <div class="cursor-glow" id="cursorGlow"></div>
+    <!-- Dark/Light mode toggle -->
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+        <i class="fa-solid fa-moon"></i>
+    </button>
 
     <nav class="navbar">
         <div class="nav-container">
-            <a href="index.html" class="logo">TMR</a>
+            <a href="index.html" class="logo">TMR.</a>
             <ul class="nav-links">
                 <li><a href="about.html">About</a></li>
                 <li><a href="projects.html">Projects</a></li>
@@ -47,76 +46,64 @@
         </div>
     </nav>
 
-    <main>
-        <!-- Hero Section -->
-        <section id="home" class="hero">
-            <div class="hero-content">
+    <section class="hero">
+        <div class="hero-inner">
 
-                <!-- Photo — blends into background -->
-                <div class="hero-image-container">
-                    <div class="image-blend-wrapper">
-                        <img src="profile.jpg" alt="Taufiq Mustafizur Rahman" id="profile-pic">
-                    </div>
-                </div>
-
-                <!-- Text -->
-                <div class="hero-text">
-                    <p>Computer Science &amp; Engineering @ Brac University</p>
-                    <h1 class="greeting-name">
-                        Taufiq
-                        <span class="name-accent">Mustafizur</span>
-                        Rahman
-                    </h1>
-                    <div class="hero-buttons">
-                        <a href="about.html" class="btn-primary glow-btn">About Me →</a>
-                        <a href="projects.html" class="btn-secondary">View Projects</a>
-                    </div>
-                    <div class="hero-socials">
-                        <a href="https://github.com/taufiqmrahman" target="_blank" aria-label="GitHub"
-                            class="social-github"><i class="fa-brands fa-github"></i></a>
-                        <a href="https://www.linkedin.com/in/taufiq222/" target="_blank" aria-label="LinkedIn"
-                            class="social-linkedin"><i class="fa-brands fa-linkedin"></i></a>
-                        <a href="https://www.facebook.com/Letthebatbewithyou" target="_blank" aria-label="Facebook"
-                            class="social-facebook"><i class="fa-brands fa-facebook"></i></a>
-                        <a href="https://www.instagram.com/letthebatbewithyou/" target="_blank" aria-label="Instagram"
-                            class="social-instagram"><i class="fa-brands fa-instagram"></i></a>
-                        <a href="https://letterboxd.com/darkknight_exe/" target="_blank" aria-label="Letterboxd"
-                            class="social-letterboxd"><i class="fa-solid fa-film"></i></a>
-                        <a href="https://open.spotify.com/user/31wwhp4rhueq36bjptexk4fy2ndi?si=0b77aac83c774318"
-                            target="_blank" aria-label="Spotify" class="social-spotify"><i
-                                class="fa-brands fa-spotify"></i></a>
-                        <a href="mailto:taufiq222003@gmail.com" aria-label="Email" class="social-email"><i
-                                class="fa-solid fa-envelope"></i></a>
-                    </div>
-                </div>
-
+            <div class="hero-image-wrap fade-in">
+                <img src="profile.jpg" alt="Taufiq Mustafizur Rahman">
             </div>
-        </section>
 
-        <!-- Explore Section -->
-        <section id="explore" class="section explore-section">
-            <div class="explore-buttons">
-                <a href="projects.html" class="explore-btn" id="exploreProjects">
-                    <i class="fa-solid fa-code"></i>
-                    <span>Projects</span>
-                    <span class="explore-btn-arrow">→</span>
-                </a>
-                <a href="hobbies.html" class="explore-btn" id="exploreHobbies">
-                    <i class="fa-solid fa-heart"></i>
-                    <span>Hobbies &amp; Interests</span>
-                    <span class="explore-btn-arrow">→</span>
-                </a>
-                <a href="connect.html" class="explore-btn" id="exploreConnect">
-                    <i class="fa-solid fa-envelope"></i>
-                    <span>Let's Connect</span>
-                    <span class="explore-btn-arrow">→</span>
-                </a>
+            <div class="hero-text-block">
+                <p class="hero-label fade-in">CSE @ Brac University</p>
+                <h1 class="greeting-name fade-in">
+                    <span class="name-first">Hi, I'm</span>
+                    Taufiq Mustafizur Rahman
+                </h1>
+                <p class="hero-tagline fade-in">
+                    <strong>Stargazer & explorer</strong> who finds inspiration in the everyday. When I'm bored or not bringing ideas to life, you can usually find me discovering the best local cafes and dessert spots.
+                </p>
+                <div class="hero-buttons fade-in">
+                    <a href="about.html" class="btn-primary">About Me</a>
+                </div>
+                <div class="hero-socials fade-in">
+                    <a href="https://github.com/taufiqmrahman" target="_blank" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/taufiq222/" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="https://www.facebook.com/Letthebatbewithyou" target="_blank" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="https://www.instagram.com/letthebatbewithyou/" target="_blank" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://letterboxd.com/darkknight_exe/" target="_blank" aria-label="Letterboxd"><i class="fa-solid fa-film"></i></a>
+                    <a href="https://open.spotify.com/user/31wwhp4rhueq36bjptexk4fy2ndi?si=0b77aac83c774318" target="_blank" aria-label="Spotify"><i class="fa-brands fa-spotify"></i></a>
+                    <a href="mailto:taufiq222003@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+                </div>
             </div>
-        </section>
-    </main>
+
+        </div>
+    </section>
+
+    <section class="explore-section">
+        <div class="explore-grid fade-in">
+            <a href="projects.html" class="explore-item" id="exploreProjects">
+                <span class="explore-item-icon">⌨️</span>
+                <div class="explore-item-title">Projects</div>
+                <div class="explore-item-desc">Code I've shipped</div>
+                <span class="explore-item-arrow">↗</span>
+            </a>
+            <a href="hobbies.html" class="explore-item" id="exploreHobbies">
+                <span class="explore-item-icon">🎯</span>
+                <div class="explore-item-title">Hobbies</div>
+                <div class="explore-item-desc">Life beyond the screen</div>
+                <span class="explore-item-arrow">↗</span>
+            </a>
+            <a href="connect.html" class="explore-item" id="exploreConnect">
+                <span class="explore-item-icon">✉️</span>
+                <div class="explore-item-title">Connect</div>
+                <div class="explore-item-desc">Let's talk</div>
+                <span class="explore-item-arrow">↗</span>
+            </a>
+        </div>
+    </section>
 
     <footer>
-        <p>© <span id="year"></span> Taufiq Mustafizur Rahman </p>
+        <p>© <span id="year"></span> Taufiq Mustafizur Rahman</p>
     </footer>
 
     <script src="script.js"></script>
