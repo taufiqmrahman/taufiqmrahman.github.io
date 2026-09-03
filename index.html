@@ -5,24 +5,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Taufiq Mustafizur Rahman</title>
-    <meta name="description" content="Taufiq Mustafizur Rahman — Computer Science & Engineering student at Brac University.">
+    <meta name="description" content="Taufiq Mustafizur Rahman — Computer Science &amp; Engineering student at Brac University.">
     <!-- Prevent dark/light mode flash -->
     <script>
         (function(){var t=localStorage.getItem('tmr-theme')||'light';document.documentElement.setAttribute('data-theme',t);document.documentElement.classList.add('no-transition');window.addEventListener('DOMContentLoaded',function(){setTimeout(function(){document.documentElement.classList.remove('no-transition');},50);});}());
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <!-- Page border frame (gkoberger-inspired) -->
+    <!-- Page border frame -->
     <div class="page-border page-border-top"></div>
     <div class="page-border page-border-bottom"></div>
     <div class="page-border page-border-left"></div>
     <div class="page-border page-border-right"></div>
+
+    <!-- Decorative background blobs -->
+    <div class="deco-blobs">
+        <span style="width:380px;height:380px;background:#FFD60A;top:-140px;right:-120px;"></span>
+        <span style="width:220px;height:220px;background:#FF3D81;bottom:18%;left:-80px;"></span>
+        <span style="width:160px;height:160px;background:#0FD5C8;bottom:8%;right:8%;"></span>
+        <span style="width:120px;height:120px;background:#A855F7;top:35%;left:3%;"></span>
+        <span style="width:90px;height:90px;background:#4ADE80;top:15%;left:18%;"></span>
+    </div>
 
     <!-- Dark/Light mode toggle -->
     <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
@@ -49,21 +58,28 @@
     <section class="hero">
         <div class="hero-inner">
 
+            <!-- Profile photo with coloured block behind it -->
             <div class="hero-image-wrap fade-in">
+                <div class="photo-bg-block"></div>
                 <img src="profile.jpg" alt="Taufiq Mustafizur Rahman">
             </div>
 
             <div class="hero-text-block">
+                <div class="status-badge fade-in">
+                    <span class="dot"></span>
+                    Open to Opportunities
+                </div>
                 <p class="hero-label fade-in">CSE @ Brac University</p>
                 <h1 class="greeting-name fade-in">
                     <span class="name-first">Hi, I'm</span>
                     Taufiq Mustafizur Rahman
                 </h1>
                 <p class="hero-tagline fade-in">
-                    <strong>Explorer and stargazer</strong> drawing inspiration from the world around me. When my creative work is paused, my next adventure is usually tracking down the coziest cafes and most decadent desserts in town.
+                    <strong>Stargazer &amp; explorer</strong> who finds inspiration in the everyday. When I'm bored or not bringing ideas to life, you can usually find me discovering the best local cafes and dessert spots.
                 </p>
                 <div class="hero-buttons fade-in">
                     <a href="about.html" class="btn-primary">About Me</a>
+                    <a href="projects.html" class="btn-secondary">View Projects →</a>
                 </div>
                 <div class="hero-socials fade-in">
                     <a href="https://github.com/taufiqmrahman" target="_blank" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>

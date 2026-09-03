@@ -9,7 +9,7 @@
     <script>(function(){var t=localStorage.getItem('tmr-theme')||'light';document.documentElement.setAttribute('data-theme',t);document.documentElement.classList.add('no-transition');window.addEventListener('DOMContentLoaded',function(){setTimeout(function(){document.documentElement.classList.remove('no-transition');},50);});}());</script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -19,6 +19,13 @@
     <div class="page-border page-border-bottom"></div>
     <div class="page-border page-border-left"></div>
     <div class="page-border page-border-right"></div>
+
+    <!-- Decorative background blobs -->
+    <div class="deco-blobs">
+        <span style="width:320px;height:320px;background:#FFD60A;top:-120px;right:-100px;"></span>
+        <span style="width:180px;height:180px;background:#A855F7;bottom:20%;left:-70px;"></span>
+        <span style="width:130px;height:130px;background:#0FD5C8;bottom:5%;right:5%;"></span>
+    </div>
 
     <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
         <i class="fa-solid fa-moon"></i>

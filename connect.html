@@ -9,7 +9,7 @@
     <script>(function(){var t=localStorage.getItem('tmr-theme')||'light';document.documentElement.setAttribute('data-theme',t);document.documentElement.classList.add('no-transition');window.addEventListener('DOMContentLoaded',function(){setTimeout(function(){document.documentElement.classList.remove('no-transition');},50);});}());</script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -19,6 +19,13 @@
     <div class="page-border page-border-bottom"></div>
     <div class="page-border page-border-left"></div>
     <div class="page-border page-border-right"></div>
+
+    <!-- Decorative background blobs -->
+    <div class="deco-blobs">
+        <span style="width:280px;height:280px;background:#0FD5C8;top:-100px;right:-80px;"></span>
+        <span style="width:200px;height:200px;background:#FFD60A;bottom:20%;left:-70px;"></span>
+        <span style="width:120px;height:120px;background:#FF3D81;top:45%;right:3%;"></span>
+    </div>
 
     <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
         <i class="fa-solid fa-moon"></i>
@@ -44,6 +51,7 @@
     <div class="connect-page">
 
         <div class="connect-header fade-in">
+            <p class="connect-pretitle">// reach out</p>
             <h1 class="connect-title">Let's Connect</h1>
         </div>
 
