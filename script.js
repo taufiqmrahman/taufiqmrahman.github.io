@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ===== THEME TOGGLE =====
     const themeToggle = document.getElementById('themeToggle');
     const root = document.documentElement;
-    const savedTheme = localStorage.getItem('tmr-theme') || 'light';
+    const savedTheme = localStorage.getItem('tmr-theme') || 'dark';
     root.setAttribute('data-theme', savedTheme);
     updateToggleIcon(savedTheme);
 
