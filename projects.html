@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects | Taufiq Mustafizur Rahman</title>
+    <meta name="description" content="Projects by Taufiq Mustafizur Rahman — Multithreaded Process Manager, Hospital Management System, and more.">
+    <script>(function(){var t=localStorage.getItem('tmr-theme')||'light';document.documentElement.setAttribute('data-theme',t);document.documentElement.classList.add('no-transition');window.addEventListener('DOMContentLoaded',function(){setTimeout(function(){document.documentElement.classList.remove('no-transition');},50);});}());</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="page-border page-border-top"></div>
+    <div class="page-border page-border-bottom"></div>
+    <div class="page-border page-border-left"></div>
+    <div class="page-border page-border-right"></div>
+
+    <!-- Decorative background blobs -->
+    <div class="deco-blobs">
+        <span style="width:320px;height:320px;background:#FFD60A;top:-120px;right:-100px;"></span>
+        <span style="width:180px;height:180px;background:#A855F7;bottom:20%;left:-70px;"></span>
+        <span style="width:130px;height:130px;background:#0FD5C8;bottom:5%;right:5%;"></span>
+    </div>
+
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+        <i class="fa-solid fa-moon"></i>
+    </button>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">TMR.</a>
+            <ul class="nav-links">
+                <li><a href="about.html">About</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="hobbies.html">Hobbies</a></li>
+                <li><a href="connect.html" class="btn-nav">Let's Connect</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="page-wrapper">
+        <section class="section">
+
+            <div class="section-header fade-in">
+                <h1 class="section-title">Projects</h1>
+                <p class="section-subtitle">// things I've built</p>
+            </div>
+
+            <div class="projects-list fade-in">
+
+                <a href="https://github.com/taufiqmrahman/DonorDash" target="_blank" class="project-card" id="projectDonorDash">
+                    <div class="project-info">
+                        <div class="project-number">// 01</div>
+                        <h3>DonorDash</h3>
+                        <p>A centralized, relational healthcare logistics platform that acts as a high-stakes matching engine — cross-referencing patient needs with donors and hospitals to allocate blood, rare plasma, and organ transplants based on biological compatibility and medical urgency.</p>
+                        <div class="tags">
+                            <span>PHP</span>
+                            <span>MySQL</span>
+                            <span>Tailwind CSS</span>
+                        </div>
+                    </div>
+                    <span class="project-arrow">→</span>
+                </a>
+
+                <a href="https://github.com/taufiqmrahman/Employee-Attrition-Prediction-Model" target="_blank" class="project-card" id="projectAttrition">
+                    <div class="project-info">
+                        <div class="project-number">// 02</div>
+                        <h3>Employee Attrition Prediction Model</h3>
+                        <p>A robust ML pipeline using Stratified 5-Fold Cross-Validation and SMOTETomek resampling to predict employee attrition from HR data, with models including Logistic Regression, Neural Networks, KNN, and K-Means Clustering.</p>
+                        <div class="tags">
+                            <span>Python</span>
+                            <span>Scikit-learn</span>
+                            <span>Keras</span>
+                        </div>
+                    </div>
+                    <span class="project-arrow">→</span>
+                </a>
+
+                <a href="https://wpmstrikesback.netlify.app/" target="_blank" class="project-card" id="projectWPM">
+                    <div class="project-info">
+                        <div class="project-number">// 03</div>
+                        <h3>WPM Strikes Back — Typing Speed Game</h3>
+                        <p>A Star Wars-themed typing speed game with lightsaber combat, real-time WPM tracking, accuracy stats, and animated duels powered by HTML5 Canvas.</p>
+                        <div class="tags">
+                            <span>JavaScript</span>
+                            <span>Canvas</span>
+                            <span>Game</span>
+                        </div>
+                    </div>
+                    <span class="project-arrow">→</span>
+                </a>
+
+                <a href="https://processsvis.netlify.app/" target="_blank" class="project-card" id="projectProcessManager">
+                    <div class="project-info">
+                        <div class="project-number">// 04</div>
+                        <h3>Multithreaded Process Manager Simulator</h3>
+                        <p>An interactive browser-based OS kernel visualizer simulating process lifecycles, parent-child relationships, and concurrency in real time.</p>
+                        <div class="tags">
+                            <span>C</span>
+                            <span>pthreads</span>
+                            <span>Semaphores</span>
+                        </div>
+                    </div>
+                    <span class="project-arrow">→</span>
+                </a>
+
+                <a href="https://ehospitalsheba.netlify.app/" target="_blank" class="project-card" id="projectHospital">
+                    <div class="project-info">
+                        <div class="project-number">// 05</div>
+                        <h3>Hospital Management System</h3>
+                        <p>A full-stack application to digitize core hospital operations including patient records, appointment scheduling, and billing workflows.</p>
+                        <div class="tags">
+                            <span>React</span>
+                            <span>Node.js</span>
+                            <span>MySQL</span>
+                        </div>
+                    </div>
+                    <span class="project-arrow">→</span>
+                </a>
+
+                <a href="https://github.com/taufiqmrahman/TicTacToe" target="_blank" class="project-card" id="projectTicTacToe">
+                    <div class="project-info">
+                        <div class="project-number">// 06</div>
+                        <h3>TicTacToe — Java Desktop App</h3>
+                        <p>A fully functional TicTacToe desktop game packaged and released as a standalone executable (.exe) for easy distribution.</p>
+                        <div class="tags">
+                            <span>Java</span>
+                            <span>OOP</span>
+                            <span>Swing</span>
+                        </div>
+                    </div>
+                    <span class="project-arrow">→</span>
+                </a>
+
+            </div>
+
+            <div style="text-align: center; margin-top: 3rem;" class="fade-in">
+                <a href="index.html" class="btn-secondary">← Back to Home</a>
+            </div>
+
+        </section>
+    </main>
+
+    <footer>
+        <p>© <span id="year"></span> Taufiq Mustafizur Rahman</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
