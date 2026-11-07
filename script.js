@@ -101,21 +101,54 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ===== RIPPLE EFFECT =====
-    document.querySelectorAll('.btn-primary, .btn-secondary').forEach(btn => {
-        btn.style.cssText += ';position:relative;overflow:hidden';
-        btn.addEventListener('click', (e) => {
-            const r    = document.createElement('span');
-            const rect = btn.getBoundingClientRect();
-            const sz   = Math.max(rect.width, rect.height);
-            r.style.cssText = `position:absolute;width:${sz}px;height:${sz}px;left:${e.clientX-rect.left-sz/2}px;top:${e.clientY-rect.top-sz/2}px;border-radius:50%;background:rgba(0,0,0,0.1);transform:scale(0);animation:rippleAnim 0.5s ease-out forwards;pointer-events:none`;
-            if (!document.getElementById('rippleStyle')) {
-                const s = document.createElement('style'); s.id = 'rippleStyle';
-                s.textContent = '@keyframes rippleAnim{to{transform:scale(2.5);opacity:0}}';
-                document.head.appendChild(s);
-            }
-            btn.appendChild(r);
-            r.addEventListener('animationend', () => r.remove());
+    // ===== LIQUID GLASS RIPPLE EFFECT =====
+    // Applied to all interactive/clickable elements for a satisfying press feedback
+    const rippleSelectors = [
+        '.btn-primary',
+        '.btn-secondary',
+        '.btn-nav',
+        '.explore-item',
+        '.project-card',
+        '.hobby-card',
+        '.social-icon',
+        '.hero-socials a',
+        '.theme-toggle',
+        '.nav-links a'
+    ].join(', ');
+
+    document.querySelectorAll(rippleSelectors).forEach(el => {
+        // Ensure positioning context for the ripple
+        const pos = window.getComputedStyle(el).position;
+        if (pos === 'static') el.style.position = 'relative';
+        el.style.overflow = 'hidden';
+
+        el.addEventListener('click', (e) => {
+            const ripple = document.createElement('span');
+            const rect   = el.getBoundingClientRect();
+            const size   = Math.max(rect.width, rect.height) * 2;
+            const x      = e.clientX - rect.left - size / 2;
+            const y      = e.clientY - rect.top - size / 2;
+
+            // Use CSS custom property for theme-aware ripple color
+            const rippleColor = getComputedStyle(document.documentElement)
+                .getPropertyValue('--ripple-color').trim();
+
+            ripple.style.cssText = `
+                position: absolute;
+                width: ${size}px;
+                height: ${size}px;
+                left: ${x}px;
+                top: ${y}px;
+                border-radius: 50%;
+                background: ${rippleColor};
+                transform: scale(0);
+                animation: rippleAnim 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+                pointer-events: none;
+                z-index: 100;
+            `;
+
+            el.appendChild(ripple);
+            ripple.addEventListener('animationend', () => ripple.remove());
         });
     });
 
